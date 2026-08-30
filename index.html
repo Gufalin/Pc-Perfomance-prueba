@@ -2645,28 +2645,136 @@ const gameImages = {
 
 /* =========================================================
    LISTAS PARA LOS BUSCADORES
+   Orden:
+   - Juegos: alfabético
+   - GPU: generación → modelo
+   - CPU: generación → modelo
 ========================================================= */
 
-const gameOptions = Object.entries(gameNames).map(
-    ([value, name]) => ({
-        value,
-        name
-    })
-);
 
-const gpuOptions = Object.entries(gpuNames).map(
-    ([value, name]) => ({
-        value,
-        name
-    })
-);
+// =========================================================
+// JUEGOS → ORDEN ALFABÉTICO
+// =========================================================
 
-const cpuOptions = Object.entries(cpuNames).map(
-    ([value, name]) => ({
+const gameOptions = Object.entries(gameNames)
+    .sort((a, b) =>
+        a[1].localeCompare(b[1], "es", {
+            numeric: true,
+            sensitivity: "base"
+        })
+    )
+    .map(([value, name]) => ({
         value,
         name
-    })
-);
+    }));
+
+
+// =========================================================
+// GPU → GENERACIÓN → MODELO
+// =========================================================
+
+const gpuOrder = [
+
+    // RTX 30
+    "rtx3060",
+    "rtx3080",
+
+    // RTX 40
+    "rtx4060",
+    "rtx4060ti",
+    "rtx4070",
+    "rtx4070ti",
+    "rtx4070tisuper",
+    "rtx4080",
+
+    // RTX 50
+    "rtx5060",
+    "rtx5070",
+    "rtx5070ti",
+    "rtx5080",
+
+    // AMD RX 7000
+    "rx7600",
+    "rx7700xt",
+    "rx7800xt",
+    "rx7900xt",
+    "rx7900xtx"
+
+];
+
+const gpuOptions = gpuOrder
+    .filter(value => gpuNames[value])
+    .map(value => ({
+        value,
+        name: gpuNames[value]
+    }));
+
+
+// =========================================================
+// CPU → GENERACIÓN → MODELO
+// =========================================================
+
+const cpuOrder = [
+
+    // =========================
+    // INTEL i5
+    // =========================
+
+    "i5-13600kf",
+    "i5-14600kf",
+
+
+    // =========================
+    // INTEL i7
+    // =========================
+
+    "i7-13700kf",
+    "i7-14700kf",
+
+
+    // =========================
+    // INTEL i9
+    // =========================
+
+    "i9-14900kf",
+
+
+    // =========================
+    // RYZEN 5
+    // =========================
+
+    "ryzen 5 5600x",
+    "ryzen 5 7600",
+    "ryzen 5 7600x",
+
+
+    // =========================
+    // RYZEN 7
+    // =========================
+
+    "ryzen 7 5800x3d",
+    "ryzen 7 7700x",
+    "ryzen 7 7800x3d",
+    "ryzen 7 9700x",
+    "ryzen 7 9800x3d",
+
+
+    // =========================
+    // RYZEN 9
+    // =========================
+
+    "ryzen 9 7900x3d",
+    "ryzen 9 9950x3d"
+
+];
+
+
+const cpuOptions = cpuOrder
+    .filter(value => cpuNames[value])
+    .map(value => ({
+        value,
+        name: cpuNames[value]
+    }));
 
 
 /* =========================================================
