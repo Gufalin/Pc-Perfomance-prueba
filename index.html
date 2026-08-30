@@ -1204,6 +1204,45 @@ button:active {
                     <option value="rtx5070">
                         RTX 5070
                     </option>
+<option value="rtx3060">
+    RTX 3060
+</option>
+
+<option value="rtx4060">
+    RTX 4060
+</option>
+
+<option value="rtx4060ti">
+    RTX 4060 Ti
+</option>
+
+<option value="rtx5070ti">
+    RTX 5070 Ti
+</option>
+
+<option value="rtx5080">
+    RTX 5080
+</option>
+
+<option value="rx7600">
+    RX 7600
+</option>
+
+<option value="rx7700xt">
+    RX 7700 XT
+</option>
+
+<option value="rx7800xt">
+    RX 7800 XT
+</option>
+
+<option value="rx7900xt">
+    RX 7900 XT
+</option>
+
+<option value="rx7900xtx">
+    RX 7900 XTX
+</option>
 
                 </select>
 
@@ -1732,7 +1771,27 @@ const gpuFactors = {
 
     rtx5060: 0.76,
 
-    rtx5070: 1.18
+    rtx5070: 1.18,
+
+    rtx3060: 0.62,
+
+    rtx4060: 0.72,
+
+    rtx4060ti: 0.82,
+
+    rtx5070ti: 1.38,
+
+    rtx5080: 1.58,
+
+    rx7600: 0.68,
+
+    rx7700xt: 0.92,
+
+    rx7800xt: 1.02,
+
+    rx7900xt: 1.25,
+
+    rx7900xtx: 1.40
 
 };
 
@@ -1755,7 +1814,28 @@ const gpuVRAM = {
 
     rtx5060: "8 GB",
 
-    rtx5070: "12 GB"
+    rtx5070: "12 GB",
+    
+    rtx3060: "12 GB",
+
+rtx4060: "8 GB",
+
+rtx4060ti: "8 GB",
+
+rtx5070ti: "16 GB",
+
+rtx5080: "16 GB",
+
+rx7600: "8 GB",
+
+rx7700xt: "12 GB",
+
+rx7800xt: "16 GB",
+
+rx7900xt: "20 GB",
+
+rx7900xtx: "24 GB"
+
 
 };
 
@@ -1834,7 +1914,26 @@ const gpuNames = {
 
     rtx5060: "RTX 5060",
 
-    rtx5070: "RTX 5070"
+    rtx5070: "RTX 5070", 
+    rtx3060: "RTX 3060",
+
+rtx4060: "RTX 4060",
+
+rtx4060ti: "RTX 4060 Ti",
+
+rtx5070ti: "RTX 5070 Ti",
+
+rtx5080: "RTX 5080",
+
+rx7600: "RX 7600",
+
+rx7700xt: "RX 7700 XT",
+
+rx7800xt: "RX 7800 XT",
+
+rx7900xt: "RX 7900 XT",
+
+rx7900xtx: "RX 7900 XTX"
 
 };
 
@@ -1857,7 +1956,27 @@ const gpuImages = {
 
     rtx5060: "./rtx5060.PNG",
 
-    rtx5070: "./rtx5070.PNG"
+    rtx5070: "./rtx5070.PNG",
+    
+    rtx3060: "./rtx3060.PNG",
+
+rtx4060: "./rtx4060.PNG",
+
+rtx4060ti: "./rtx4060ti.PNG",
+
+rtx5070ti: "./rtx5070ti.PNG",
+
+rtx5080: "./rtx5080.PNG",
+
+rx7600: "./rx7600.PNG",
+
+rx7700xt: "./rx7700xt.PNG",
+
+rx7800xt: "./rx7800xt.PNG",
+
+rx7900xt: "./rx7900xt.PNG",
+
+rx7900xtx: "./rx7900xtx.PNG"
 
 };
 
@@ -2073,38 +2192,69 @@ function applyRayTracing(
     game
 ) {
 
-    const rtLoss = {
+    const nvidiaLoss = {
 
         cyberpunk: {
-
             "1080": 0.69,
-
             "1440": 0.64,
-
             "2160": 0.58
-
         },
 
         eldenring: {
-
             "1080": 0.82,
-
             "1440": 0.78,
-
             "2160": 0.70
-
         }
 
     };
 
 
+    const amdLoss = {
+
+    cyberpunk: {
+        "1080": 0.64,
+        "1440": 0.59,
+        "2160": 0.53
+    },
+
+    eldenring: {
+        "1080": 0.79,
+        "1440": 0.74,
+        "2160": 0.66
+    }
+
+};
+
+
+    const amdGPUs = [
+
+        "rx7600",
+        "rx7700xt",
+        "rx7800xt",
+        "rx7900xt",
+        "rx7900xtx"
+
+    ];
+
+
+    const isAMD =
+        amdGPUs.includes(gpu);
+
+
+    const lossTable =
+        isAMD
+            ? amdLoss
+            : nvidiaLoss;
+
+
     const gameLoss =
-        rtLoss[game] || rtLoss.cyberpunk;
+        lossTable[game] ||
+        lossTable.cyberpunk;
 
 
     return Math.round(
         fps *
-        (gameLoss[resolution] || 0.65)
+        (gameLoss[resolution] || 0.60)
     );
 
 }
@@ -2117,25 +2267,25 @@ function applyRayTracing(
 function applyFrameGeneration(fps, gpu) {
 
     /*
-       RTX 50 → estimación con DLSS Multi Frame Generation
-       RTX 40 → Frame Generation tradicional
-
-       RTX 50: x1.65
-       RTX 40: x1.50
+       RTX 40 → Frame Generation x1.50
+       RTX 50 → Multi Frame Generation x1.65
     */
 
-    if (
+    const isRTX50 =
         gpu === "rtx5060" ||
         gpu === "rtx5070" ||
         gpu === "rtx5070ti" ||
-        gpu === "rtx5080"
-    ) {
+        gpu === "rtx5080";
+
+
+    if (isRTX50) {
 
         return Math.round(
             fps * 1.65
         );
 
     }
+
 
     return Math.round(
         fps * 1.50
@@ -2387,13 +2537,28 @@ function updateFrameGenerationVisibility() {
 
 
     /*
-       Frame Generation disponible para:
+       FRAME GENERATION
 
-       - Cyberpunk 2077
-       - The Last of Us Part II
-
-       RTX 3080 queda excluida.
+       RTX 30 → No disponible
+       RTX 40 → x1.50
+       RTX 50 → x1.65
+       AMD → No disponible
     */
+
+    const isRTX40 =
+        gpu === "rtx4070" ||
+        gpu === "rtx4070ti" ||
+        gpu === "rtx4070tisuper" ||
+        gpu === "rtx4080" ||
+        gpu === "rtx4060" ||
+        gpu === "rtx4060ti";
+
+    const isRTX50 =
+        gpu === "rtx5060" ||
+        gpu === "rtx5070" ||
+        gpu === "rtx5070ti" ||
+        gpu === "rtx5080";
+
 
     if (
         (
@@ -2401,9 +2566,10 @@ function updateFrameGenerationVisibility() {
             game === "tlou2"
         )
         &&
-        gpu
-        &&
-        gpu !== "rtx3080"
+        (
+            isRTX40 ||
+            isRTX50
+        )
     ) {
 
         framegen.style.display =
