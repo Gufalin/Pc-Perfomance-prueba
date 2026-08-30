@@ -1725,7 +1725,271 @@ button:active {
     }
 
 }
+/* =========================================================
+   SELECTORES PERSONALIZADOS CON BÚSQUEDA
+========================================================= */
 
+.custom-select {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+}
+
+.custom-select-trigger {
+    width: 100%;
+    min-height: 54px;
+
+    padding: 0 17px;
+
+    border-radius: 13px;
+    border: 1px solid #303644;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1b1f29,
+            #151820
+        );
+
+    color: #dfe2ea;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    cursor: pointer;
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+.custom-select-trigger::after {
+    content: "";
+
+    width: 8px;
+    height: 8px;
+
+    border-right: 2px solid #777f91;
+    border-bottom: 2px solid #777f91;
+
+    transform:
+        rotate(45deg)
+        translateY(-2px);
+
+    transition: transform .2s ease;
+}
+
+.custom-select.open .custom-select-trigger {
+    border-color: #5865f2;
+
+    box-shadow:
+        0 0 0 3px rgba(88,101,242,0.12);
+}
+
+.custom-select.open .custom-select-trigger::after {
+    transform:
+        rotate(225deg)
+        translateY(-2px);
+}
+
+.custom-select-menu {
+    position: absolute;
+
+    z-index: 1000;
+
+    top: calc(100% + 7px);
+    left: 0;
+    right: 0;
+
+    padding: 8px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1b1f29,
+            #151820
+        );
+
+    border: 1px solid #303644;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.45);
+
+    display: none;
+}
+
+.custom-select.open .custom-select-menu {
+    display: block;
+}
+
+.custom-select-search {
+    width: 100%;
+
+    height: 44px;
+
+    padding: 0 13px;
+
+    margin-bottom: 7px;
+
+    border-radius: 10px;
+
+    border: 1px solid #303644;
+
+    outline: none;
+
+    background: #10131a;
+
+    color: white;
+
+    font-size: 15px;
+}
+
+.custom-select-search::placeholder {
+    color: #676e7d;
+}
+
+.custom-select-search:focus {
+    border-color: #5865f2;
+
+    box-shadow:
+        0 0 0 2px rgba(88,101,242,.10);
+}
+
+.custom-select-options {
+    max-height: 245px;
+
+    overflow-y: auto;
+
+    overscroll-behavior: contain;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+.custom-select-option {
+    min-height: 45px;
+
+    padding: 0 12px;
+
+    display: flex;
+    align-items: center;
+
+    border-radius: 9px;
+
+    color: #cdd1db;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition:
+        background .15s ease,
+        color .15s ease;
+}
+
+.custom-select-option:hover {
+    background: #222733;
+    color: white;
+}
+
+.custom-select-option.selected {
+    background: rgba(88,101,242,.13);
+    color: #9fa8ff;
+}
+
+.custom-select-empty {
+    padding: 15px 10px;
+
+    color: #676e7d;
+
+    font-size: 13px;
+
+    text-align: center;
+}
+
+/* Ocultamos los select nativos */
+.custom-select-native {
+    display: none !important;
+}
+
+
+/* =========================================================
+   SELECTORES DENTRO DE LOS CONTENEDORES
+========================================================= */
+
+.game-container .custom-select,
+.gpu-container .custom-select,
+.cpu-container .custom-select {
+    flex: 1;
+    min-width: 0;
+}
+
+.game-container .custom-select-trigger,
+.gpu-container .custom-select-trigger,
+.cpu-container .custom-select-trigger {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+}
+
+.game-container .custom-select.open .custom-select-trigger,
+.gpu-container .custom-select.open .custom-select-trigger,
+.cpu-container .custom-select.open .custom-select-trigger {
+    border: none;
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   MÓVIL
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .custom-select-trigger {
+        min-height: 52px;
+        font-size: 14px;
+    }
+
+    .custom-select-menu {
+        position: fixed;
+
+        left: 12px;
+        right: 12px;
+
+        top: auto;
+        bottom: 12px;
+
+        max-height: 70vh;
+
+        padding: 10px;
+
+        border-radius: 17px;
+
+        box-shadow:
+            0 25px 70px rgba(0,0,0,.65);
+    }
+
+    .custom-select-options {
+        max-height: calc(70vh - 65px);
+    }
+
+    .custom-select-search {
+        height: 48px;
+        font-size: 16px;
+    }
+
+    .custom-select-option {
+        min-height: 48px;
+        font-size: 14px;
+    }
+
+}
 </style>
 
 </head>
@@ -2127,7 +2391,575 @@ button:active {
 
 <script>
 
+/* =========================================================
+   SELECTORES PERSONALIZADOS
+========================================================= */
 
+let openedCustomSelect = null;
+
+
+/* =========================
+   CERRAR TODOS
+========================= */
+
+function closeAllCustomSelects() {
+
+    document
+        .querySelectorAll(".custom-select.open")
+        .forEach(select => {
+
+            select.classList.remove("open");
+
+            const input =
+                select.querySelector(".custom-select-search");
+
+            if (input) {
+                input.value = "";
+            }
+
+            filterCustomOptions(select);
+
+        });
+
+    openedCustomSelect = null;
+
+}
+
+
+/* =========================
+   ABRIR SELECTOR
+========================= */
+
+function openCustomSelect(customSelect) {
+
+    if (
+        openedCustomSelect &&
+        openedCustomSelect !== customSelect
+    ) {
+
+        closeAllCustomSelects();
+
+    }
+
+    customSelect.classList.add("open");
+
+    openedCustomSelect = customSelect;
+
+    const search =
+        customSelect.querySelector(
+            ".custom-select-search"
+        );
+
+    /*
+       Esto es lo importante para iPhone:
+       hacemos focus REAL sobre un input.
+       Al ser input y no select nativo,
+       iOS muestra el teclado.
+    */
+
+    requestAnimationFrame(() => {
+
+        if (search) {
+
+            search.focus();
+
+            /*
+               Colocamos el cursor al final.
+            */
+
+            search.setSelectionRange(
+                search.value.length,
+                search.value.length
+            );
+
+        }
+
+    });
+
+}
+
+
+/* =========================
+   FILTRAR
+========================= */
+
+function filterCustomOptions(customSelect) {
+
+    const search =
+        customSelect.querySelector(
+            ".custom-select-search"
+        );
+
+    const options =
+        customSelect.querySelectorAll(
+            ".custom-select-option"
+        );
+
+    const text =
+        (search?.value || "")
+        .toLowerCase()
+        .trim();
+
+    let visible = 0;
+
+    options.forEach(option => {
+
+        const optionText =
+            option.dataset.search
+            .toLowerCase();
+
+        const matches =
+            optionText.includes(text);
+
+        option.style.display =
+            matches
+                ? "flex"
+                : "none";
+
+        if (matches) {
+            visible++;
+        }
+
+    });
+
+
+    const empty =
+        customSelect.querySelector(
+            ".custom-select-empty"
+        );
+
+    if (empty) {
+
+        empty.style.display =
+            visible === 0
+                ? "block"
+                : "none";
+
+    }
+
+}
+
+
+/* =========================
+   SELECCIONAR
+========================= */
+
+function selectCustomOption(
+    customSelect,
+    value,
+    text
+) {
+
+    const nativeSelect =
+        customSelect.querySelector(
+            ".custom-select-native"
+        );
+
+    const trigger =
+        customSelect.querySelector(
+            ".custom-select-trigger"
+        );
+
+    const label =
+        trigger.querySelector(
+            ".custom-select-label"
+        );
+
+
+    nativeSelect.value = value;
+
+    label.textContent =
+        text;
+
+
+    customSelect
+        .querySelectorAll(
+            ".custom-select-option"
+        )
+        .forEach(option => {
+
+            option.classList.toggle(
+                "selected",
+                option.dataset.value === value
+            );
+
+        });
+
+
+    /*
+       Lanzamos el mismo evento change
+       que utilizabas antes.
+    */
+
+    nativeSelect.dispatchEvent(
+        new Event(
+            "change",
+            {
+                bubbles: true
+            }
+        )
+    );
+
+
+    closeAllCustomSelects();
+
+}
+
+
+/* =========================
+   CREAR SELECTOR
+========================= */
+
+function createCustomSelect(nativeSelect) {
+
+    /*
+       Evitamos crear dos veces
+    */
+
+    if (
+        nativeSelect.dataset.customized === "true"
+    ) {
+        return;
+    }
+
+    nativeSelect.dataset.customized = "true";
+
+
+    const wrapper =
+        document.createElement("div");
+
+    wrapper.className =
+        "custom-select";
+
+
+    const trigger =
+        document.createElement("div");
+
+    trigger.className =
+        "custom-select-trigger";
+
+
+    const label =
+        document.createElement("span");
+
+    label.className =
+        "custom-select-label";
+
+
+    const firstOption =
+        nativeSelect.options[0];
+
+
+    label.textContent =
+        firstOption
+            ? firstOption.textContent.trim()
+            : "";
+
+
+    trigger.appendChild(label);
+
+
+    const menu =
+        document.createElement("div");
+
+    menu.className =
+        "custom-select-menu";
+
+
+    const search =
+        document.createElement("input");
+
+    search.type =
+        "text";
+
+    search.className =
+        "custom-select-search";
+
+    search.placeholder =
+        "Buscar...";
+
+    search.autocomplete =
+        "off";
+
+    search.autocorrect =
+        "off";
+
+    search.autocapitalize =
+        "off";
+
+    search.spellcheck =
+        false;
+
+
+    const optionsContainer =
+        document.createElement("div");
+
+    optionsContainer.className =
+        "custom-select-options";
+
+
+    const empty =
+        document.createElement("div");
+
+    empty.className =
+        "custom-select-empty";
+
+    empty.textContent =
+        "No se encontraron resultados";
+
+    empty.style.display =
+        "none";
+
+
+    /*
+       Creamos las opciones a partir
+       del select original.
+    */
+
+    Array.from(
+        nativeSelect.options
+    )
+    .forEach((option, index) => {
+
+        /*
+           No mostramos la opción
+           vacía como una opción real.
+        */
+
+        if (
+            index === 0 &&
+            option.value === ""
+        ) {
+            return;
+        }
+
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "custom-select-option";
+
+        item.dataset.value =
+            option.value;
+
+        item.dataset.search =
+            option.textContent
+                .trim()
+                .toLowerCase();
+
+
+        item.textContent =
+            option.textContent.trim();
+
+
+        item.addEventListener(
+            "click",
+            function(event) {
+
+                event.stopPropagation();
+
+                selectCustomOption(
+                    wrapper,
+                    option.value,
+                    option.textContent.trim()
+                );
+
+            }
+        );
+
+
+        optionsContainer.appendChild(item);
+
+    });
+
+
+    menu.appendChild(search);
+
+    menu.appendChild(optionsContainer);
+
+    menu.appendChild(empty);
+
+
+    wrapper.appendChild(trigger);
+
+    wrapper.appendChild(menu);
+
+
+    /*
+       Guardamos el select original
+       dentro del nuevo componente.
+    */
+
+    nativeSelect.classList.add(
+        "custom-select-native"
+    );
+
+
+    wrapper.appendChild(nativeSelect);
+
+
+    /*
+       Sustituimos el select original
+       por el nuevo componente.
+    */
+
+    nativeSelect.parentNode
+        .insertBefore(
+            wrapper,
+            nativeSelect
+        );
+
+
+    /*
+       Click en el selector
+    */
+
+    trigger.addEventListener(
+        "click",
+        function(event) {
+
+            event.stopPropagation();
+
+            if (
+                wrapper.classList.contains("open")
+            ) {
+
+                closeAllCustomSelects();
+
+            }
+
+            else {
+
+                openCustomSelect(
+                    wrapper
+                );
+
+            }
+
+        }
+    );
+
+
+    /*
+       Búsqueda en tiempo real
+    */
+
+    search.addEventListener(
+        "input",
+        function(event) {
+
+            event.stopPropagation();
+
+            filterCustomOptions(
+                wrapper
+            );
+
+        }
+    );
+
+
+    /*
+       Evitamos que tocar el input
+       cierre el selector.
+    */
+
+    search.addEventListener(
+        "click",
+        function(event) {
+
+            event.stopPropagation();
+
+        }
+    );
+
+
+    search.addEventListener(
+        "touchstart",
+        function(event) {
+
+            event.stopPropagation();
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    filterCustomOptions(
+        wrapper
+    );
+
+}
+
+
+/* =========================================================
+   INICIALIZAR SELECTORES
+========================================================= */
+
+function initializeCustomSelects() {
+
+    document
+        .querySelectorAll(
+            "select"
+        )
+        .forEach(select => {
+
+            createCustomSelect(
+                select
+            );
+
+        });
+
+}
+
+
+/* =========================================================
+   CERRAR AL TOCAR FUERA
+========================================================= */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            !event.target.closest(
+                ".custom-select"
+            )
+        ) {
+
+            closeAllCustomSelects();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   CERRAR AL TOCAR FUERA EN MÓVIL
+========================================================= */
+
+document.addEventListener(
+    "touchstart",
+    function(event) {
+
+        if (
+            !event.target.closest(
+                ".custom-select"
+            )
+        ) {
+
+            closeAllCustomSelects();
+
+        }
+
+    },
+    {
+        passive: true
+    }
+);
 /* =========================================================
    DATOS DE LOS SELECTORES
 ========================================================= */
