@@ -1594,7 +1594,7 @@ button:active {
 }
 
 /* =========================================================
-   SEO ACORDEONES
+   SEO ACORDEON
 ========================================================= */
 
 .seo-content {
@@ -1611,48 +1611,22 @@ button:active {
 
 .seo-accordion {
 
-    width: 100%;
-
-    margin-bottom: 10px;
-
-    border: 1px solid rgba(255,255,255,.07);
-
-    border-radius: 14px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #171a22,
-            #12151c
-        );
-
-    overflow: hidden;
-
-    transition:
-        border-color .2s ease,
-        box-shadow .2s ease;
-}
-
-
-.seo-accordion:hover {
-
-    border-color:
-        rgba(255,255,255,.12);
+    border-bottom: 1px solid rgba(255,255,255,.08);
 
 }
 
 
-/* BOTÓN */
+/* TITULO */
 
-.seo-toggle {
+.seo-header {
 
     width: 100%;
 
-    min-height: 60px;
+    min-height: 70px;
 
     margin: 0;
 
-    padding: 0 18px;
+    padding: 0;
 
     display: flex;
 
@@ -1660,43 +1634,41 @@ button:active {
 
     justify-content: space-between;
 
-    gap: 15px;
+    gap: 20px;
+
+    background: transparent;
 
     border: none;
 
     border-radius: 0;
 
-    background: transparent;
+    box-shadow: none;
 
     color: #f2f4f8;
 
-    font-size: 16px;
-
-    font-weight: 700;
-
-    letter-spacing: 0;
-
     text-align: left;
 
-    box-shadow: none;
+    font-size: 24px;
+
+    font-weight: 750;
+
+    letter-spacing: -0.3px;
 
     cursor: pointer;
 
-    transition:
-        background .2s ease;
 }
 
 
-.seo-toggle:hover {
+/* QUITAR EFECTOS DEL BOTON GENERAL */
+
+.seo-header:hover {
 
     transform: none;
 
     filter: none;
 
-    background:
-        rgba(255,255,255,.025);
-
     box-shadow: none;
+
 }
 
 
@@ -1704,9 +1676,11 @@ button:active {
 
 .seo-plus {
 
-    width: 28px;
+    flex-shrink: 0;
 
-    height: 28px;
+    width: 32px;
+
+    height: 32px;
 
     display: flex;
 
@@ -1714,26 +1688,24 @@ button:active {
 
     justify-content: center;
 
-    flex-shrink: 0;
-
-    border-radius: 8px;
-
     color: #858b9b;
 
-    font-size: 22px;
+    font-size: 28px;
 
-    font-weight: 400;
+    font-weight: 300;
+
+    line-height: 1;
 
     transition:
         transform .25s ease,
-        color .2s ease,
-        background .2s ease;
+        color .25s ease;
+
 }
 
 
 /* CONTENIDO */
 
-.seo-panel {
+.seo-body {
 
     display: grid;
 
@@ -1741,72 +1713,54 @@ button:active {
 
     transition:
         grid-template-rows .3s ease;
+
 }
 
 
-.seo-panel::before {
-
-    content: "";
+.seo-body p {
 
     min-height: 0;
-}
-
-
-.seo-panel > p {
 
     overflow: hidden;
 
     margin: 0;
 
-    padding: 0 18px;
-
     color: #858b9b;
 
-    font-size: 14px;
+    font-size: 15px;
 
     line-height: 1.75;
 
-    transition:
-        padding .3s ease;
 }
 
 
 /* ABIERTO */
 
-.seo-accordion.open {
-
-    border-color:
-        rgba(88,101,242,.28);
-
-}
-
-
-.seo-accordion.open .seo-panel {
+.seo-accordion.active .seo-body {
 
     grid-template-rows: 1fr;
+
 }
 
 
-.seo-accordion.open .seo-panel > p {
+.seo-accordion.active .seo-body p {
 
-    padding:
-        0 18px 18px;
+    padding-bottom: 22px;
+
 }
 
 
-.seo-accordion.open .seo-plus {
+.seo-accordion.active .seo-plus {
 
     transform: rotate(45deg);
 
-    color: #aeb5ff;
+    color: #ffffff;
 
-    background:
-        rgba(88,101,242,.10);
 }
 
 
 /* =========================================================
-   SEO ACORDEONES MOVIL
+   MOVIL
 ========================================================= */
 
 @media (max-width:600px) {
@@ -1815,43 +1769,37 @@ button:active {
 
         margin-top: 40px;
 
-        padding:
-            0 12px 50px;
+        padding: 0 17px 50px;
+
     }
 
-    .seo-toggle {
 
-        min-height: 56px;
+    .seo-header {
 
-        padding:
-            0 15px;
+        min-height: 64px;
 
-        font-size: 14px;
+        font-size: 20px;
+
     }
+
 
     .seo-plus {
 
-        width: 26px;
+        width: 28px;
 
-        height: 26px;
+        height: 28px;
 
-        font-size: 20px;
+        font-size: 25px;
+
     }
 
-    .seo-panel > p {
 
-        padding:
-            0 15px;
+    .seo-body p {
 
-        font-size: 13px;
+        font-size: 14px;
 
         line-height: 1.7;
-    }
 
-    .seo-accordion.open .seo-panel > p {
-
-        padding:
-            0 15px 16px;
     }
 
 }
@@ -4820,59 +4768,22 @@ showCPU();
 updateFrameGenerationVisibility();
 
 /* =========================================================
-   ACORDEONES SEO
+   SEO ACORDEONES
 ========================================================= */
 
-function toggleSEO(button) {
+document.querySelectorAll(".seo-header").forEach(header => {
 
-    const accordion =
-        button.parentElement;
+    header.addEventListener("click", function() {
 
-    const isOpen =
-        accordion.classList.contains("open");
-
-
-    // Cerrar los demás
-    document
-        .querySelectorAll(".seo-accordion.open")
-        .forEach(item => {
-
-            if (item !== accordion) {
-
-                item.classList.remove("open");
-
-                const toggle =
-                    item.querySelector(".seo-toggle");
-
-                toggle.setAttribute(
-                    "aria-expanded",
-                    "false"
-                );
-            }
-
-        });
+        const accordion =
+            this.closest(".seo-accordion");
 
 
-    // Abrir / cerrar actual
-    if (isOpen) {
+        accordion.classList.toggle("active");
 
-        accordion.classList.remove("open");
+    });
 
-        button.setAttribute(
-            "aria-expanded",
-            "false"
-        );
-
-    } else {
-
-        accordion.classList.add("open");
-
-        button.setAttribute(
-            "aria-expanded",
-            "true"
-        );
-
-    }
+});
 
 }
 
