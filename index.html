@@ -1990,6 +1990,323 @@ button:active {
     }
 
 }
+/* =========================================================
+   SELECTORES PERSONALIZADOS — JUEGO / GPU / CPU
+========================================================= */
+
+.custom-select {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+}
+
+.custom-select-trigger {
+    width: 100%;
+    min-height: 54px;
+    padding: 0 17px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: transparent;
+    color: #dfe2ea;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    cursor: pointer;
+}
+
+.custom-select-trigger::after {
+    content: "";
+
+    width: 8px;
+    height: 8px;
+
+    border-right: 2px solid #777f91;
+    border-bottom: 2px solid #777f91;
+
+    transform: rotate(45deg);
+
+    transition: transform .2s ease;
+}
+
+.custom-select.open .custom-select-trigger::after {
+    transform: rotate(225deg);
+}
+
+
+/* =========================
+   PANEL
+========================= */
+
+.custom-select-menu {
+    position: absolute;
+
+    z-index: 9999;
+
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+
+    padding: 9px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1b1f29,
+            #151820
+        );
+
+    border: 1px solid #303644;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.5);
+
+    display: none;
+}
+
+.custom-select.open .custom-select-menu {
+    display: block;
+}
+
+
+/* =========================
+   BUSCADOR
+========================= */
+
+.custom-select-search-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.custom-select-search {
+    width: 100%;
+    height: 46px;
+
+    padding: 0 14px 0 45px;
+
+    border-radius: 10px;
+
+    border: 1px solid #303644;
+
+    outline: none;
+
+    background: #10131a;
+
+    color: white;
+
+    font-size: 15px;
+}
+
+.custom-select-search::placeholder {
+    color: #676e7d;
+}
+
+.custom-select-search:focus {
+    border-color: #5865f2;
+
+    box-shadow:
+        0 0 0 2px rgba(88,101,242,.10);
+}
+
+
+/* =========================
+   LUPA
+========================= */
+
+.custom-select-search-icon {
+    position: absolute;
+
+    left: 14px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    width: 19px;
+    height: 19px;
+
+    pointer-events: none;
+}
+
+.custom-select-search-icon::before {
+    content: "";
+
+    position: absolute;
+
+    width: 11px;
+    height: 11px;
+
+    left: 0;
+    top: 0;
+
+    border: 2px solid #9aa1b2;
+
+    border-radius: 50%;
+}
+
+.custom-select-search-icon::after {
+    content: "";
+
+    position: absolute;
+
+    width: 7px;
+    height: 2px;
+
+    background: #9aa1b2;
+
+    border-radius: 2px;
+
+    transform: rotate(45deg);
+
+    left: 11px;
+    top: 13px;
+}
+
+
+/* =========================
+   LISTA
+========================= */
+
+.custom-select-options {
+    max-height: 250px;
+
+    margin-top: 7px;
+
+    overflow-y: auto;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+.custom-select-option {
+    min-height: 45px;
+
+    padding: 0 12px;
+
+    display: flex;
+    align-items: center;
+
+    border-radius: 9px;
+
+    color: #cdd1db;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition:
+        background .15s ease,
+        color .15s ease;
+}
+
+.custom-select-option:hover {
+    background: #222733;
+    color: white;
+}
+
+.custom-select-option.selected {
+    background: rgba(88,101,242,.14);
+    color: #aab1ff;
+}
+
+.custom-select-empty {
+    padding: 15px 10px;
+
+    color: #676e7d;
+
+    font-size: 13px;
+
+    text-align: center;
+
+    display: none;
+}
+
+
+/* =========================
+   SELECT NATIVO OCULTO
+========================= */
+
+.custom-select-native {
+    display: none !important;
+}
+
+
+/* =========================
+   CONTENEDORES
+========================= */
+
+.game-container .custom-select,
+.gpu-container .custom-select,
+.cpu-container .custom-select {
+    flex: 1;
+    min-width: 0;
+}
+
+
+/* =========================================================
+   PC
+========================================================= */
+
+@media (min-width: 601px) {
+
+    .custom-select-menu {
+        max-width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   MÓVIL
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .custom-select-trigger {
+        min-height: 52px;
+        font-size: 14px;
+    }
+
+    .custom-select-menu {
+
+        position: fixed;
+
+        left: 12px;
+        right: 12px;
+
+        bottom: 12px;
+        top: auto;
+
+        max-height: 70vh;
+
+        border-radius: 17px;
+
+        padding: 10px;
+
+        box-shadow:
+            0 25px 70px rgba(0,0,0,.65);
+    }
+
+    .custom-select-search {
+        height: 50px;
+        font-size: 16px;
+    }
+
+    .custom-select-options {
+        max-height: calc(70vh - 70px);
+    }
+
+    .custom-select-option {
+        min-height: 49px;
+    }
+
+}
 </style>
 
 </head>
@@ -3678,7 +3995,596 @@ function highlightOption(
 
 }
 
+/* =========================================================
+   SELECTORES PERSONALIZADOS
+========================================================= */
 
+let openedCustomSelect = null;
+
+
+/* =========================
+   CERRAR TODOS
+========================= */
+
+function closeAllCustomSelects() {
+
+    document
+        .querySelectorAll(".custom-select.open")
+        .forEach(select => {
+
+            select.classList.remove("open");
+
+            const search =
+                select.querySelector(
+                    ".custom-select-search"
+                );
+
+            if (search) {
+                search.value = "";
+            }
+
+            filterCustomOptions(select);
+
+        });
+
+    openedCustomSelect = null;
+
+}
+
+
+/* =========================
+   ABRIR
+========================= */
+
+function openCustomSelect(select) {
+
+    if (
+        openedCustomSelect &&
+        openedCustomSelect !== select
+    ) {
+        closeAllCustomSelects();
+    }
+
+    select.classList.add("open");
+
+    openedCustomSelect = select;
+
+    const search =
+        select.querySelector(
+            ".custom-select-search"
+        );
+
+    /*
+       Focus real sobre INPUT.
+       Esto permite que iPhone abra
+       el teclado.
+    */
+
+    requestAnimationFrame(() => {
+
+        if (search) {
+
+            search.focus();
+
+        }
+
+    });
+
+}
+
+
+/* =========================
+   FILTRAR
+========================= */
+
+function filterCustomOptions(select) {
+
+    const search =
+        select.querySelector(
+            ".custom-select-search"
+        );
+
+    const options =
+        select.querySelectorAll(
+            ".custom-select-option"
+        );
+
+    const text =
+        (search?.value || "")
+        .toLowerCase()
+        .trim();
+
+    let visible = 0;
+
+    options.forEach(option => {
+
+        const name =
+            option.dataset.search;
+
+        const match =
+            name.includes(text);
+
+        option.style.display =
+            match
+                ? "flex"
+                : "none";
+
+        if (match) {
+            visible++;
+        }
+
+    });
+
+    const empty =
+        select.querySelector(
+            ".custom-select-empty"
+        );
+
+    if (empty) {
+
+        empty.style.display =
+            visible === 0
+                ? "block"
+                : "none";
+
+    }
+
+}
+
+
+/* =========================
+   SELECCIONAR
+========================= */
+
+function selectCustomOption(
+    customSelect,
+    value,
+    text
+) {
+
+    const nativeSelect =
+        customSelect.querySelector(
+            ".custom-select-native"
+        );
+
+    const label =
+        customSelect.querySelector(
+            ".custom-select-label"
+        );
+
+    nativeSelect.value = value;
+
+    label.textContent = text;
+
+
+    customSelect
+        .querySelectorAll(
+            ".custom-select-option"
+        )
+        .forEach(option => {
+
+            option.classList.toggle(
+                "selected",
+                option.dataset.value === value
+            );
+
+        });
+
+
+    /*
+       Mantenemos tus eventos
+       originales.
+    */
+
+    nativeSelect.dispatchEvent(
+        new Event(
+            "change",
+            {
+                bubbles: true
+            }
+        )
+    );
+
+
+    closeAllCustomSelects();
+
+}
+
+
+/* =========================
+   CREAR SELECTOR
+========================= */
+
+function createCustomSelect(nativeSelect) {
+
+    if (
+        nativeSelect.dataset.customized === "true"
+    ) {
+        return;
+    }
+
+    nativeSelect.dataset.customized =
+        "true";
+
+
+    const wrapper =
+        document.createElement("div");
+
+    wrapper.className =
+        "custom-select";
+
+
+    /* =========================
+       BOTÓN
+    ========================= */
+
+    const trigger =
+        document.createElement("div");
+
+    trigger.className =
+        "custom-select-trigger";
+
+
+    const label =
+        document.createElement("span");
+
+    label.className =
+        "custom-select-label";
+
+
+    label.textContent =
+        nativeSelect.options[0]
+            ?.textContent
+            .trim() || "";
+
+
+    trigger.appendChild(label);
+
+
+    /* =========================
+       PANEL
+    ========================= */
+
+    const menu =
+        document.createElement("div");
+
+    menu.className =
+        "custom-select-menu";
+
+
+    /* =========================
+       BUSCADOR
+    ========================= */
+
+    const searchWrapper =
+        document.createElement("div");
+
+    searchWrapper.className =
+        "custom-select-search-wrapper";
+
+
+    const searchIcon =
+        document.createElement("span");
+
+    searchIcon.className =
+        "custom-select-search-icon";
+
+
+    const search =
+        document.createElement("input");
+
+    search.className =
+        "custom-select-search";
+
+    search.type =
+        "text";
+
+    search.placeholder =
+        "Buscar...";
+
+    search.autocomplete =
+        "off";
+
+    search.autocorrect =
+        "off";
+
+    search.autocapitalize =
+        "off";
+
+    search.spellcheck =
+        false;
+
+
+    searchWrapper.appendChild(
+        searchIcon
+    );
+
+    searchWrapper.appendChild(
+        search
+    );
+
+
+    /* =========================
+       OPCIONES
+    ========================= */
+
+    const optionsContainer =
+        document.createElement("div");
+
+    optionsContainer.className =
+        "custom-select-options";
+
+
+    const empty =
+        document.createElement("div");
+
+    empty.className =
+        "custom-select-empty";
+
+    empty.textContent =
+        "No se encontraron resultados";
+
+
+    Array.from(
+        nativeSelect.options
+    )
+    .forEach((option, index) => {
+
+        /*
+           No mostramos la opción
+           "Juego...", "GPU...", etc.
+        */
+
+        if (
+            index === 0 &&
+            option.value === ""
+        ) {
+            return;
+        }
+
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "custom-select-option";
+
+        item.dataset.value =
+            option.value;
+
+        item.dataset.search =
+            option.textContent
+                .trim()
+                .toLowerCase();
+
+        item.textContent =
+            option.textContent.trim();
+
+
+        item.addEventListener(
+            "click",
+            function(event) {
+
+                event.stopPropagation();
+
+                selectCustomOption(
+                    wrapper,
+                    option.value,
+                    option.textContent.trim()
+                );
+
+            }
+        );
+
+
+        optionsContainer.appendChild(
+            item
+        );
+
+    });
+
+
+    menu.appendChild(
+        searchWrapper
+    );
+
+    menu.appendChild(
+        optionsContainer
+    );
+
+    menu.appendChild(
+        empty
+    );
+
+
+    /* =========================
+       OCULTAR NATIVO
+    ========================= */
+
+    nativeSelect.classList.add(
+        "custom-select-native"
+    );
+
+
+    /* =========================
+       MONTAR
+    ========================= */
+
+    wrapper.appendChild(
+        trigger
+    );
+
+    wrapper.appendChild(
+        menu
+    );
+
+
+    nativeSelect.parentNode
+        .insertBefore(
+            wrapper,
+            nativeSelect
+        );
+
+    wrapper.appendChild(
+        nativeSelect
+    );
+
+
+    /* =========================
+       ABRIR / CERRAR
+    ========================= */
+
+    trigger.addEventListener(
+        "click",
+        function(event) {
+
+            event.stopPropagation();
+
+            if (
+                wrapper.classList.contains("open")
+            ) {
+
+                closeAllCustomSelects();
+
+            }
+
+            else {
+
+                openCustomSelect(
+                    wrapper
+                );
+
+            }
+
+        }
+    );
+
+
+    /* =========================
+       BÚSQUEDA
+    ========================= */
+
+    search.addEventListener(
+        "input",
+        function(event) {
+
+            event.stopPropagation();
+
+            filterCustomOptions(
+                wrapper
+            );
+
+        }
+    );
+
+
+    search.addEventListener(
+        "click",
+        function(event) {
+
+            event.stopPropagation();
+
+        }
+    );
+
+
+    search.addEventListener(
+        "touchstart",
+        function(event) {
+
+            event.stopPropagation();
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    filterCustomOptions(
+        wrapper
+    );
+
+}
+
+
+/* =========================================================
+   INICIALIZAR
+========================================================= */
+
+function initializeCustomSelects() {
+
+    /*
+       IMPORTANTE:
+       Solo Juego, GPU y CPU.
+
+       Resolución y Calidad quedan
+       como select normales.
+    */
+
+    [
+        "game",
+        "gpu",
+        "cpu"
+    ]
+    .forEach(id => {
+
+        const select =
+            document.getElementById(id);
+
+        if (select) {
+
+            createCustomSelect(
+                select
+            );
+
+        }
+
+    });
+
+}
+
+
+/* =========================================================
+   CERRAR TOCANDO FUERA
+========================================================= */
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        if (
+            !event.target.closest(
+                ".custom-select"
+            )
+        ) {
+
+            closeAllCustomSelects();
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   ESC EN PC
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeAllCustomSelects();
+
+        }
+
+    }
+);
 /* =========================================================
    DATOS BASE
 ========================================================= */
