@@ -1176,6 +1176,25 @@ button:active {
                     <option value="tlou2">
                         The Last of Us Part II
                     </option>
+<option value="gta5">
+    Grand Theft Auto V
+</option>
+
+<option value="cs2">
+    Counter-Strike 2
+</option>
+
+<option value="pubg">
+    PUBG: BATTLEGROUNDS
+</option>
+
+<option value="r6s">
+    Rainbow Six Siege
+</option>
+
+<option value="rust">
+    Rust
+</option>
 
                 </select>
 
@@ -1590,6 +1609,116 @@ const baseData = {
         }
 
     }
+
+gta5: {
+
+    "1080": {
+        competitive: 190,
+        balanced: 155,
+        quality: 125
+    },
+
+    "1440": {
+        competitive: 155,
+        balanced: 125,
+        quality: 100
+    },
+
+    "2160": {
+        competitive: 105,
+        balanced: 85,
+        quality: 68
+    }
+
+},
+
+cs2: {
+
+    "1080": {
+        competitive: 390,
+        balanced: 330,
+        quality: 275
+    },
+
+    "1440": {
+        competitive: 320,
+        balanced: 270,
+        quality: 225
+    },
+
+    "2160": {
+        competitive: 225,
+        balanced: 190,
+        quality: 160
+    }
+
+},
+
+pubg: {
+
+    "1080": {
+        competitive: 220,
+        balanced: 185,
+        quality: 155
+    },
+
+    "1440": {
+        competitive: 180,
+        balanced: 150,
+        quality: 125
+    },
+
+    "2160": {
+        competitive: 120,
+        balanced: 100,
+        quality: 82
+    }
+
+},
+
+r6s: {
+
+    "1080": {
+        competitive: 330,
+        balanced: 285,
+        quality: 240
+    },
+
+    "1440": {
+        competitive: 275,
+        balanced: 235,
+        quality: 200
+    },
+
+    "2160": {
+        competitive: 185,
+        balanced: 160,
+        quality: 135
+    }
+
+},
+
+rust: {
+
+    "1080": {
+        competitive: 150,
+        balanced: 120,
+        quality: 95
+    },
+
+    "1440": {
+        competitive: 120,
+        balanced: 95,
+        quality: 78
+    },
+
+    "2160": {
+        competitive: 78,
+        balanced: 62,
+        quality: 50
+    }
+
+}
 
 };
 
@@ -2070,6 +2199,41 @@ function showGame() {
             '<img src="./tlou2.png" alt="The Last of Us Part II">';
 
     }
+
+else if (game === "gta5") {
+
+    preview.innerHTML =
+        '<img src="./gta5.WEBP" alt="Grand Theft Auto V">';
+
+}
+
+else if (game === "cs2") {
+
+    preview.innerHTML =
+        '<img src="./csgo.JPG" alt="Counter-Strike 2">';
+
+}
+
+else if (game === "pubg") {
+
+    preview.innerHTML =
+        '<img src="./pubg.JPG" alt="PUBG: BATTLEGROUNDS">';
+
+}
+
+else if (game === "r6s") {
+
+    preview.innerHTML =
+        '<img src="./r6s.JPG" alt="Rainbow Six Siege">';
+
+}
+
+else if (game === "rust") {
+
+    preview.innerHTML =
+        '<img src="./rust.WEBP" alt="Rust">';
+
+}
 
     else {
 
