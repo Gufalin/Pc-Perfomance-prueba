@@ -1219,6 +1219,8 @@ button:active {
 
 /* =========================================================
    DATOS BASE
+   RTX 3080 + CPU DE REFERENCIA
+   FPS NATIVOS, SIN DLSS/FG
 ========================================================= */
 
 const baseData = {
@@ -1226,21 +1228,21 @@ const baseData = {
     fortnite: {
 
         "1080": {
-            competitive: 324,
-            balanced: 228,
-            quality: 177
+            competitive: 430,
+            balanced: 320,
+            quality: 220
         },
 
         "1440": {
-            competitive: 206,
-            balanced: 145,
-            quality: 112
+            competitive: 390,
+            balanced: 285,
+            quality: 195
         },
 
         "2160": {
-            competitive: 109,
-            balanced: 77,
-            quality: 59
+            competitive: 250,
+            balanced: 175,
+            quality: 115
         }
 
     },
@@ -1249,21 +1251,21 @@ const baseData = {
     warzone: {
 
         "1080": {
-            competitive: 204,
-            balanced: 203,
-            quality: 184
+            competitive: 171,
+            balanced: 137,
+            quality: 125
         },
 
         "1440": {
-            competitive: 182,
-            balanced: 177,
-            quality: 160
+            competitive: 150,
+            balanced: 102,
+            quality: 77
         },
 
         "2160": {
-            competitive: 155,
-            balanced: 153,
-            quality: 137
+            competitive: 92,
+            balanced: 72,
+            quality: 58
         }
 
     },
@@ -1272,21 +1274,21 @@ const baseData = {
     cyberpunk: {
 
         "1080": {
-            competitive: 136,
-            balanced: 103,
-            quality: 73
+            competitive: 162,
+            balanced: 125,
+            quality: 74
         },
 
         "1440": {
-            competitive: 103,
-            balanced: 75,
-            quality: 54
+            competitive: 136,
+            balanced: 105,
+            quality: 62
         },
 
         "2160": {
-            competitive: 69,
-            balanced: 48,
-            quality: 38
+            competitive: 90,
+            balanced: 70,
+            quality: 41
         }
 
     },
@@ -1295,21 +1297,21 @@ const baseData = {
     eldenring: {
 
         "1080": {
-            competitive: 145,
-            balanced: 105,
-            quality: 88
+            competitive: 269,
+            balanced: 208,
+            quality: 122
         },
 
         "1440": {
-            competitive: 125,
-            balanced: 92,
-            quality: 76
+            competitive: 225,
+            balanced: 174,
+            quality: 102
         },
 
         "2160": {
-            competitive: 82,
-            balanced: 61,
-            quality: 52
+            competitive: 132,
+            balanced: 102,
+            quality: 60
         }
 
     },
@@ -1318,21 +1320,21 @@ const baseData = {
     valorant: {
 
         "1080": {
-            competitive: 430,
-            balanced: 340,
-            quality: 285
+            competitive: 500,
+            balanced: 420,
+            quality: 344
         },
 
         "1440": {
-            competitive: 370,
-            balanced: 300,
-            quality: 250
+            competitive: 470,
+            balanced: 390,
+            quality: 303
         },
 
         "2160": {
-            competitive: 275,
-            balanced: 225,
-            quality: 190
+            competitive: 390,
+            balanced: 310,
+            quality: 234
         }
 
     },
@@ -1341,21 +1343,21 @@ const baseData = {
     rdr2: {
 
         "1080": {
-            competitive: 165,
-            balanced: 105,
-            quality: 78
+            competitive: 188,
+            balanced: 146,
+            quality: 86
         },
 
         "1440": {
-            competitive: 130,
-            balanced: 88,
-            quality: 64
+            competitive: 158,
+            balanced: 122,
+            quality: 72
         },
 
         "2160": {
-            competitive: 82,
-            balanced: 57,
-            quality: 42
+            competitive: 98,
+            balanced: 76,
+            quality: 44
         }
 
     },
@@ -1364,21 +1366,21 @@ const baseData = {
     tlou2: {
 
         "1080": {
-            competitive: 145,
-            balanced: 105,
-            quality: 82
+            competitive: 176,
+            balanced: 136,
+            quality: 80
         },
 
         "1440": {
-            competitive: 115,
-            balanced: 84,
-            quality: 65
+            competitive: 148,
+            balanced: 114,
+            quality: 67
         },
 
         "2160": {
-            competitive: 72,
-            balanced: 52,
-            quality: 41
+            competitive: 95,
+            balanced: 73,
+            quality: 43
         }
 
     }
@@ -1388,23 +1390,24 @@ const baseData = {
 
 /* =========================================================
    GPU
+   RELACIÓN APROXIMADA RESPECTO A RTX 3080
 ========================================================= */
 
 const gpuFactors = {
 
     rtx3080: 1.00,
 
-    rtx4070: 1.08,
+    rtx4070: 1.06,
 
     rtx4070ti: 1.18,
 
-    rtx4070tisuper: 1.27,
+    rtx4070tisuper: 1.29,
 
     rtx4080: 1.43,
 
-    rtx5060: 0.78,
+    rtx5060: 0.76,
 
-    rtx5070: 1.17
+    rtx5070: 1.18
 
 };
 
@@ -1440,17 +1443,17 @@ const cpuFactors = {
 
     "i5-14600kf": 1.00,
 
-    "ryzen 5 7600": 0.94,
+    "ryzen 7 7800x3d": 1.07,
 
-    "ryzen 7 7800x3d": 1.06,
+    "ryzen 5 7600": 0.93,
 
-    "i5-13600kf": 0.98,
+    "i5-13600kf": 0.97,
 
-    "ryzen 7 9800x3d": 1.10,
+    "ryzen 7 9800x3d": 1.11,
 
-    "i7-14700kf": 1.07,
+    "i7-14700kf": 1.05,
 
-    "ryzen 7 5800x3d": 1.03
+    "ryzen 7 5800x3d": 0.96
 
 };
 
@@ -1461,17 +1464,17 @@ const cpuFactors = {
 
 const gameCPUImpact = {
 
-    fortnite: 0.55,
+    fortnite: 0.65,
 
-    warzone: 0.45,
+    warzone: 0.50,
 
     cyberpunk: 0.20,
 
-    eldenring: 0.30,
+    eldenring: 0.25,
 
-    valorant: 0.70,
+    valorant: 0.80,
 
-    rdr2: 0.25,
+    rdr2: 0.30,
 
     tlou2: 0.25
 
@@ -1627,9 +1630,32 @@ function getFPS(
             cpuContribution
         );
 
-    return Math.round(
-        base * relativePerformance
-    );
+    let result =
+        Math.round(
+            base * relativePerformance
+        );
+
+
+    /*
+       Evita resultados exagerados en juegos
+       donde la CPU limita especialmente.
+    */
+
+    if (
+        game === "valorant" &&
+        resolution === "2160"
+    ) {
+
+        result =
+            Math.min(
+                result,
+                500
+            );
+
+    }
+
+
+    return result;
 
 }
 
@@ -1644,37 +1670,43 @@ function createFPSRange(fps) {
 
     if (fps < 50) {
 
-        variation = 7;
+        variation = 6;
 
     }
 
     else if (fps < 80) {
 
-        variation = 9;
+        variation = 8;
 
     }
 
     else if (fps < 120) {
 
-        variation = 12;
+        variation = 10;
 
     }
 
     else if (fps < 180) {
 
-        variation = 15;
+        variation = 14;
 
     }
 
     else if (fps < 250) {
 
-        variation = 20;
+        variation = 18;
+
+    }
+
+    else if (fps < 400) {
+
+        variation = 25;
 
     }
 
     else {
 
-        variation = 25;
+        variation = 35;
 
     }
 
@@ -1712,9 +1744,9 @@ function applyRayTracing(
 
             "1080": 0.69,
 
-            "1440": 0.66,
+            "1440": 0.64,
 
-            "2160": 0.60
+            "2160": 0.58
 
         },
 
@@ -1749,8 +1781,16 @@ function applyRayTracing(
 
 function applyFrameGeneration(fps) {
 
+    /*
+       FG aumenta los FPS mostrados,
+       pero no equivale a un aumento real
+       de rendimiento de renderizado.
+
+       1.50 es una estimación moderada.
+    */
+
     return Math.round(
-        fps * 1.55
+        fps * 1.50
     );
 
 }
@@ -2265,7 +2305,7 @@ function calculateFPS() {
 
         /*
            RTX 3080 no utiliza Frame Generation
-           en esta calculadora.
+           DLSS Frame Generation de NVIDIA.
         */
 
         if (gpu === "rtx3080") {
