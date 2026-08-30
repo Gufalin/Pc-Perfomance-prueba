@@ -1273,7 +1273,278 @@ button:active {
     }
 
 }
+/* =========================================================
+   SELECTORES CON BUSCADOR
+========================================================= */
 
+.searchable-select {
+    position: relative;
+    width: 100%;
+    min-width: 0;
+}
+
+.searchable-select-trigger {
+    width: 100%;
+    min-height: 54px;
+
+    padding: 0 45px 0 17px;
+
+    border-radius: 13px;
+    border: 1px solid #303644;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1b1f29,
+            #151820
+        );
+
+    color: #dfe2ea;
+
+    font-size: 15px;
+    font-weight: 500;
+
+    display: flex;
+    align-items: center;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    position: relative;
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+}
+
+.searchable-select-trigger:hover {
+    border-color: #41495a;
+}
+
+.searchable-select.open .searchable-select-trigger {
+    border-color: #5865f2;
+
+    box-shadow:
+        0 0 0 3px rgba(88,101,242,0.12);
+}
+
+.searchable-select-trigger::after {
+    content: "";
+
+    position: absolute;
+
+    right: 17px;
+
+    top: 50%;
+
+    width: 7px;
+    height: 7px;
+
+    border-right: 2px solid #777f91;
+    border-bottom: 2px solid #777f91;
+
+    transform:
+        translateY(-65%)
+        rotate(45deg);
+
+    transition: transform .2s ease;
+}
+
+.searchable-select.open
+.searchable-select-trigger::after {
+    transform:
+        translateY(-25%)
+        rotate(225deg);
+}
+
+.searchable-select-panel {
+    display: none;
+
+    position: absolute;
+
+    z-index: 1000;
+
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+
+    padding: 8px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #202531,
+            #171a22
+        );
+
+    border:
+        1px solid rgba(255,255,255,.10);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.45),
+        inset 0 1px 0 rgba(255,255,255,.035);
+
+    overflow: hidden;
+}
+
+.searchable-select.open
+.searchable-select-panel {
+    display: block;
+
+    animation:
+        selectorAppear .18s ease;
+}
+
+.searchable-select-search {
+    width: 100%;
+
+    height: 43px;
+
+    padding: 0 13px;
+
+    margin-bottom: 7px;
+
+    border-radius: 10px;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    outline: none;
+
+    background: #11141b;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-family: inherit;
+}
+
+.searchable-select-search::placeholder {
+    color: #686f80;
+}
+
+.searchable-select-search:focus {
+    border-color: rgba(88,101,242,.65);
+
+    box-shadow:
+        0 0 0 2px rgba(88,101,242,.08);
+}
+
+.searchable-select-options {
+    max-height: 240px;
+
+    overflow-y: auto;
+
+    overscroll-behavior: contain;
+
+    scrollbar-width: thin;
+}
+
+.searchable-select-option {
+    min-height: 43px;
+
+    padding: 0 12px;
+
+    display: flex;
+    align-items: center;
+
+    border-radius: 9px;
+
+    color: #cfd3dd;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    transition:
+        background .15s ease,
+        color .15s ease;
+}
+
+.searchable-select-option:hover {
+    background: rgba(88,101,242,.12);
+
+    color: white;
+}
+
+.searchable-select-option.selected {
+    background: rgba(88,101,242,.16);
+
+    color: #aeb8ff;
+
+    font-weight: 600;
+}
+
+.searchable-select-no-results {
+    padding: 14px 10px;
+
+    color: #676e7d;
+
+    font-size: 13px;
+
+    text-align: center;
+}
+
+.searchable-select-native {
+    display: none !important;
+}
+
+@keyframes selectorAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(-4px) scale(.99);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+/* Los selectores dentro de los contenedores
+   siguen ocupando todo el espacio */
+
+.game-container .searchable-select,
+.gpu-container .searchable-select,
+.cpu-container .searchable-select {
+    flex: 1;
+    min-width: 0;
+}
+
+/* En móvil */
+
+@media (max-width:600px) {
+
+    .searchable-select-trigger {
+        min-height: 52px;
+        font-size: 14px;
+    }
+
+    .searchable-select-panel {
+        position: absolute;
+
+        max-height: 310px;
+    }
+
+    .searchable-select-options {
+        max-height: 220px;
+    }
+
+    .searchable-select-option {
+        min-height: 46px;
+        font-size: 14px;
+    }
+
+}
 </style>
 </head>
 
@@ -4100,6 +4371,514 @@ showCPU();
 
 updateFrameGenerationVisibility();
 
+/* =========================================================
+   SELECTORES PERSONALIZADOS CON BUSCADOR
+========================================================= */
+
+function initSearchableSelects() {
+
+    const selects = document.querySelectorAll("select");
+
+    selects.forEach(select => {
+
+        /* Evitar inicializar dos veces */
+
+        if (
+            select.dataset.searchableInitialized === "true"
+        ) {
+            return;
+        }
+
+        select.dataset.searchableInitialized = "true";
+
+
+        /* =========================
+           CONTENEDOR
+        ========================= */
+
+        const wrapper =
+            document.createElement("div");
+
+        wrapper.className =
+            "searchable-select";
+
+
+        /* =========================
+           BOTÓN
+        ========================= */
+
+        const trigger =
+            document.createElement("div");
+
+        trigger.className =
+            "searchable-select-trigger";
+
+        trigger.textContent =
+            select.options[select.selectedIndex]?.text ||
+            select.options[0]?.text ||
+            "";
+
+
+        /* =========================
+           PANEL
+        ========================= */
+
+        const panel =
+            document.createElement("div");
+
+        panel.className =
+            "searchable-select-panel";
+
+
+        /* =========================
+           BUSCADOR
+        ========================= */
+
+        const search =
+            document.createElement("input");
+
+        search.type = "search";
+
+        search.className =
+            "searchable-select-search";
+
+        search.placeholder =
+            "Buscar...";
+
+        search.autocomplete = "off";
+
+        search.autocorrect = "off";
+
+        search.spellcheck = false;
+
+
+        /* =========================
+           OPCIONES
+        ========================= */
+
+        const optionsContainer =
+            document.createElement("div");
+
+        optionsContainer.className =
+            "searchable-select-options";
+
+
+        /* =========================
+           CONSTRUIR OPCIONES
+        ========================= */
+
+        function renderOptions(filter = "") {
+
+            optionsContainer.innerHTML = "";
+
+            const normalizedFilter =
+                filter
+                    .toLowerCase()
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "");
+
+
+            let found = false;
+
+
+            Array.from(select.options).forEach(
+                option => {
+
+                    /*
+                       No mostramos la opción vacía
+                       dentro de la lista.
+                    */
+
+                    if (!option.value) {
+                        return;
+                    }
+
+
+                    const text =
+                        option.textContent.trim();
+
+
+                    const normalizedText =
+                        text
+                            .toLowerCase()
+                            .normalize("NFD")
+                            .replace(
+                                /[\u0300-\u036f]/g,
+                                ""
+                            );
+
+
+                    if (
+                        normalizedFilter &&
+                        !normalizedText.includes(
+                            normalizedFilter
+                        )
+                    ) {
+                        return;
+                    }
+
+
+                    found = true;
+
+
+                    const optionElement =
+                        document.createElement("div");
+
+                    optionElement.className =
+                        "searchable-select-option";
+
+
+                    if (
+                        option.value ===
+                        select.value
+                    ) {
+
+                        optionElement.classList.add(
+                            "selected"
+                        );
+
+                    }
+
+
+                    optionElement.textContent =
+                        text;
+
+
+                    optionElement.addEventListener(
+                        "click",
+                        function(event) {
+
+                            event.stopPropagation();
+
+
+                            /* Cambiar select real */
+
+                            select.value =
+                                option.value;
+
+
+                            /*
+                               Disparamos el change
+                               para que funcionen tus
+                               funciones actuales.
+                            */
+
+                            select.dispatchEvent(
+                                new Event(
+                                    "change",
+                                    {
+                                        bubbles: true
+                                    }
+                                )
+                            );
+
+
+                            /* Actualizar texto */
+
+                            trigger.textContent =
+                                text;
+
+
+                            /* Cerrar */
+
+                            closeSelector();
+
+                        }
+                    );
+
+
+                    optionsContainer.appendChild(
+                        optionElement
+                    );
+
+                }
+            );
+
+
+            if (!found) {
+
+                const noResults =
+                    document.createElement("div");
+
+                noResults.className =
+                    "searchable-select-no-results";
+
+                noResults.textContent =
+                    "No se encontraron resultados";
+
+                optionsContainer.appendChild(
+                    noResults
+                );
+
+            }
+
+        }
+
+
+        /* =========================
+           ABRIR
+        ========================= */
+
+        function openSelector() {
+
+            /*
+               Cerrar otros selectores
+            */
+
+            document
+                .querySelectorAll(
+                    ".searchable-select.open"
+                )
+                .forEach(other => {
+
+                    if (other !== wrapper) {
+
+                        other.classList.remove(
+                            "open"
+                        );
+
+                    }
+
+                });
+
+
+            wrapper.classList.add("open");
+
+
+            search.value = "";
+
+
+            renderOptions();
+
+
+            /*
+               En móvil esto hace que aparezca
+               inmediatamente el teclado.
+            */
+
+            setTimeout(() => {
+
+                search.focus();
+
+            }, 50);
+
+        }
+
+
+        /* =========================
+           CERRAR
+        ========================= */
+
+        function closeSelector() {
+
+            wrapper.classList.remove(
+                "open"
+            );
+
+            search.value = "";
+
+        }
+
+
+        /* =========================
+           CLICK TRIGGER
+        ========================= */
+
+        trigger.addEventListener(
+            "click",
+            function(event) {
+
+                event.stopPropagation();
+
+
+                if (
+                    wrapper.classList.contains(
+                        "open"
+                    )
+                ) {
+
+                    closeSelector();
+
+                }
+
+                else {
+
+                    openSelector();
+
+                }
+
+            }
+        );
+
+
+        /* =========================
+           BUSCAR
+        ========================= */
+
+        search.addEventListener(
+            "input",
+            function() {
+
+                renderOptions(
+                    search.value
+                );
+
+            }
+        );
+
+
+        /*
+           Evita que tocar el buscador
+           cierre el selector.
+        */
+
+        search.addEventListener(
+            "click",
+            function(event) {
+
+                event.stopPropagation();
+
+            }
+        );
+
+
+        /* =========================
+           PANEL
+        ========================= */
+
+        panel.appendChild(search);
+
+        panel.appendChild(
+            optionsContainer
+        );
+
+
+        /* =========================
+           REEMPLAZAR SELECT
+        ========================= */
+
+        select.parentNode.insertBefore(
+            wrapper,
+            select
+        );
+
+        wrapper.appendChild(
+            trigger
+        );
+
+        wrapper.appendChild(
+            panel
+        );
+
+        wrapper.appendChild(
+            select
+        );
+
+
+        select.classList.add(
+            "searchable-select-native"
+        );
+
+
+        /* =========================
+           ACTUALIZAR SI CAMBIA
+           DESDE JAVASCRIPT
+        ========================= */
+
+        select.addEventListener(
+            "change",
+            function() {
+
+                const selected =
+                    select.options[
+                        select.selectedIndex
+                    ];
+
+                if (selected) {
+
+                    trigger.textContent =
+                        selected.textContent.trim();
+
+                }
+
+
+                renderOptions(
+                    search.value
+                );
+
+            }
+        );
+
+    });
+
+
+    /* =========================
+       CERRAR AL TOCAR FUERA
+    ========================= */
+
+    document.addEventListener(
+        "click",
+        function(event) {
+
+            document
+                .querySelectorAll(
+                    ".searchable-select.open"
+                )
+                .forEach(wrapper => {
+
+                    if (
+                        !wrapper.contains(
+                            event.target
+                        )
+                    ) {
+
+                        wrapper.classList.remove(
+                            "open"
+                        );
+
+                    }
+
+                });
+
+        }
+    );
+
+
+    /* =========================
+       ESC PARA CERRAR
+    ========================= */
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (event.key === "Escape") {
+
+                document
+                    .querySelectorAll(
+                        ".searchable-select.open"
+                    )
+                    .forEach(wrapper => {
+
+                        wrapper.classList.remove(
+                            "open"
+                        );
+
+                    });
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   INICIALIZAR
+========================================================= */
+
+initSearchableSelects();
 </script>
 
 </body>
