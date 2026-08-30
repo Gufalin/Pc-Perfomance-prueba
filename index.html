@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="google-site-verification" content="v3g-o59Ws917jV7mmwsiECLS-nkyBbQ3T7-pXI6gUBk" />
+
 <title>Calculadora de FPS para PC | PC Performance</title>
 
 <meta name="description" content="Calcula los FPS aproximados de tu PC en juegos como Fortnite, Cyberpunk 2077, Warzone, Elden Ring y más. Selecciona tu GPU, CPU, resolución y calidad gráfica.">
@@ -746,11 +747,16 @@ button:active {
    BARRA
 ========================= */
 
+.performance-wrapper {
+    width: 100%;
+    margin-top: 20px;
+}
+
 .performance-bar {
     width: 100%;
     height: 12px;
 
-    margin-top: 20px;
+    margin-top: 0;
 
     background: #10131a;
 
@@ -759,110 +765,6 @@ button:active {
     border-radius: 20px;
 
     overflow: hidden;
-}
-
-<div class="performance-scale">
-    <span style="left: 12.5%;">30</span>
-    <span style="left: 25%;">60</span>
-    <span style="left: 50%;">120</span>
-    <span style="left: 100%;">240</span>
-</div>
-
-.performance-scale {
-    position: relative;
-    width: 100%;
-    height: 22px;
-    margin-top: 7px;
-    color: #676e7d;
-    font-size: 10px;
-}
-
-.performance-scale span {
-    position: absolute;
-    top: 0;
-    white-space: nowrap;
-}
-
-.performance-scale span::before {
-    content: "";
-    position: absolute;
-    width: 1px;
-    height: 7px;
-    background: #4a5060;
-    top: -7px;
-    left: 50%;
-}
-
-.scale-30 {
-    left: 12.5%;
-    transform: translateX(-50%);
-}
-
-.scale-60 {
-    left: 25%;
-    transform: translateX(-50%);
-}
-
-.scale-120 {
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.scale-240 {
-    right: 0;
-}
-
-.scale-240::before {
-    left: 100%;
-}
-
-.performance-scale span {
-    position: absolute;
-    transform: translateX(-50%);
-    white-space: nowrap;
-}
-
-.performance-scale span:last-child {
-    transform: translateX(-100%);
-}
-
-.performance-wrapper {
-    width: 100%;
-    margin-top: 20px;
-}
-
-.performance-scale {
-    position: relative;
-    width: 100%;
-    height: 22px;
-    margin-top: 7px;
-    color: #676e7d;
-    font-size: 10px;
-}
-
-.performance-scale span {
-    position: absolute;
-    top: 0;
-    white-space: nowrap;
-}
-
-.scale-30 {
-    left: 12.5%;
-    transform: translateX(-50%);
-}
-
-.scale-60 {
-    left: 25%;
-    transform: translateX(-50%);
-}
-
-.scale-120 {
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.scale-240 {
-    right: 0;
 }
 
 .performance-fill {
@@ -886,6 +788,66 @@ button:active {
         fillPerformance .9s
         cubic-bezier(.22,1,.36,1)
         forwards;
+}
+
+.performance-scale {
+    position: relative;
+
+    width: 100%;
+    height: 22px;
+
+    margin-top: 7px;
+
+    color: #676e7d;
+
+    font-size: 10px;
+}
+
+.performance-scale span {
+    position: absolute;
+
+    top: 0;
+
+    white-space: nowrap;
+}
+
+.performance-scale span::before {
+    content: "";
+
+    position: absolute;
+
+    width: 1px;
+    height: 7px;
+
+    background: #4a5060;
+
+    top: -7px;
+
+    left: 50%;
+}
+
+.scale-30 {
+    left: 12.5%;
+    transform: translateX(-50%);
+}
+
+.scale-60 {
+    left: 25%;
+    transform: translateX(-50%);
+}
+
+.scale-120 {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.scale-240 {
+    right: 0;
+    transform: translateX(0);
+}
+
+.scale-240::before {
+    left: 100%;
 }
 
 
@@ -1071,6 +1033,7 @@ button:active {
 
 }
 
+
 /* =========================
    SEO CONTENT
 ========================= */
@@ -1176,25 +1139,26 @@ button:active {
                     <option value="tlou2">
                         The Last of Us Part II
                     </option>
-<option value="gta5">
-    Grand Theft Auto V
-</option>
 
-<option value="cs2">
-    Counter-Strike 2
-</option>
+                    <option value="gta5">
+                        Grand Theft Auto V
+                    </option>
 
-<option value="pubg">
-    PUBG: BATTLEGROUNDS
-</option>
+                    <option value="cs2">
+                        Counter-Strike 2
+                    </option>
 
-<option value="r6s">
-    Rainbow Six Siege
-</option>
+                    <option value="pubg">
+                        PUBG: BATTLEGROUNDS
+                    </option>
 
-<option value="rust">
-    Rust
-</option>
+                    <option value="r6s">
+                        Rainbow Six Siege
+                    </option>
+
+                    <option value="rust">
+                        Rust
+                    </option>
 
                 </select>
 
@@ -1394,27 +1358,38 @@ button:active {
     </div>
 
 </div>
+
+
 <section class="seo-content">
+
     <h2>Calculadora de FPS para PC</h2>
+
     <p>
         PC Performance es una calculadora de rendimiento que permite
         estimar los FPS que puede alcanzar un ordenador en diferentes
         juegos según la tarjeta gráfica, el procesador, la resolución
         y la calidad gráfica seleccionada.
     </p>
+
+
     <h2>¿Cómo calcular los FPS de mi PC?</h2>
+
     <p>
         Selecciona el juego que quieres probar, tu GPU, tu CPU,
         la resolución y la calidad gráfica. La calculadora mostrará
         un rango aproximado de FPS para esa configuración.
     </p>
+
     <p>
         Los resultados son estimaciones y pueden variar dependiendo
         de los controladores, la versión del juego, la memoria RAM,
         la temperatura del ordenador, los procesos en segundo plano
         y otros ajustes del sistema.
     </p>
+
+
     <h2>¿Qué GPU necesito para jugar?</h2>
+
     <p>
         La tarjeta gráfica es uno de los componentes que más influye
         en el rendimiento de los juegos, especialmente al utilizar
@@ -1422,7 +1397,10 @@ button:active {
         también puede tener una influencia importante dependiendo del
         juego y de la configuración utilizada.
     </p>
+
+
     <h2>¿Qué resolución debería utilizar?</h2>
+
     <p>
         1080p ofrece una mayor cantidad de FPS y suele requerir menos
         potencia gráfica. 1440p ofrece una mayor calidad de imagen
@@ -1430,14 +1408,21 @@ button:active {
         4K requiere una GPU considerablemente más potente para mantener
         tasas de FPS elevadas.
     </p>
+
+
     <h2>FPS en juegos</h2>
+
     <p>
         Puedes utilizar la calculadora para comparar el rendimiento
         aproximado de diferentes configuraciones en juegos como
         Fortnite, Cyberpunk 2077, Call of Duty: Warzone, Elden Ring,
-        Valorant, Red Dead Redemption 2 y The Last of Us Part II.
+        Valorant, Red Dead Redemption 2, The Last of Us Part II,
+        Grand Theft Auto V, Counter-Strike 2, PUBG: BATTLEGROUNDS,
+        Rainbow Six Siege y Rust.
     </p>
+
 </section>
+
 
 <script>
 
@@ -1608,117 +1593,122 @@ const baseData = {
             quality: 43
         }
 
+    },
+
+
+    gta5: {
+
+        "1080": {
+            competitive: 190,
+            balanced: 155,
+            quality: 125
+        },
+
+        "1440": {
+            competitive: 155,
+            balanced: 125,
+            quality: 100
+        },
+
+        "2160": {
+            competitive: 105,
+            balanced: 85,
+            quality: 68
+        }
+
+    },
+
+
+    cs2: {
+
+        "1080": {
+            competitive: 390,
+            balanced: 330,
+            quality: 275
+        },
+
+        "1440": {
+            competitive: 320,
+            balanced: 270,
+            quality: 225
+        },
+
+        "2160": {
+            competitive: 225,
+            balanced: 190,
+            quality: 160
+        }
+
+    },
+
+
+    pubg: {
+
+        "1080": {
+            competitive: 220,
+            balanced: 185,
+            quality: 155
+        },
+
+        "1440": {
+            competitive: 180,
+            balanced: 150,
+            quality: 125
+        },
+
+        "2160": {
+            competitive: 120,
+            balanced: 100,
+            quality: 82
+        }
+
+    },
+
+
+    r6s: {
+
+        "1080": {
+            competitive: 330,
+            balanced: 285,
+            quality: 240
+        },
+
+        "1440": {
+            competitive: 275,
+            balanced: 235,
+            quality: 200
+        },
+
+        "2160": {
+            competitive: 185,
+            balanced: 160,
+            quality: 135
+        }
+
+    },
+
+
+    rust: {
+
+        "1080": {
+            competitive: 150,
+            balanced: 120,
+            quality: 95
+        },
+
+        "1440": {
+            competitive: 120,
+            balanced: 95,
+            quality: 78
+        },
+
+        "2160": {
+            competitive: 78,
+            balanced: 62,
+            quality: 50
+        }
+
     }
-
-gta5: {
-
-    "1080": {
-        competitive: 190,
-        balanced: 155,
-        quality: 125
-    },
-
-    "1440": {
-        competitive: 155,
-        balanced: 125,
-        quality: 100
-    },
-
-    "2160": {
-        competitive: 105,
-        balanced: 85,
-        quality: 68
-    }
-
-},
-
-cs2: {
-
-    "1080": {
-        competitive: 390,
-        balanced: 330,
-        quality: 275
-    },
-
-    "1440": {
-        competitive: 320,
-        balanced: 270,
-        quality: 225
-    },
-
-    "2160": {
-        competitive: 225,
-        balanced: 190,
-        quality: 160
-    }
-
-},
-
-pubg: {
-
-    "1080": {
-        competitive: 220,
-        balanced: 185,
-        quality: 155
-    },
-
-    "1440": {
-        competitive: 180,
-        balanced: 150,
-        quality: 125
-    },
-
-    "2160": {
-        competitive: 120,
-        balanced: 100,
-        quality: 82
-    }
-
-},
-
-r6s: {
-
-    "1080": {
-        competitive: 330,
-        balanced: 285,
-        quality: 240
-    },
-
-    "1440": {
-        competitive: 275,
-        balanced: 235,
-        quality: 200
-    },
-
-    "2160": {
-        competitive: 185,
-        balanced: 160,
-        quality: 135
-    }
-
-},
-
-rust: {
-
-    "1080": {
-        competitive: 150,
-        balanced: 120,
-        quality: 95
-    },
-
-    "1440": {
-        competitive: 120,
-        balanced: 95,
-        quality: 78
-    },
-
-    "2160": {
-        competitive: 78,
-        balanced: 62,
-        quality: 50
-    }
-
-}
 
 };
 
@@ -1811,7 +1801,17 @@ const gameCPUImpact = {
 
     rdr2: 0.30,
 
-    tlou2: 0.25
+    tlou2: 0.25,
+
+    gta5: 0.45,
+
+    cs2: 0.75,
+
+    pubg: 0.50,
+
+    r6s: 0.70,
+
+    rust: 0.60
 
 };
 
@@ -2200,40 +2200,40 @@ function showGame() {
 
     }
 
-else if (game === "gta5") {
+    else if (game === "gta5") {
 
-    preview.innerHTML =
-        '<img src="./gta5.WEBP" alt="Grand Theft Auto V">';
+        preview.innerHTML =
+            '<img src="./gta5.WEBP" alt="Grand Theft Auto V">';
 
-}
+    }
 
-else if (game === "cs2") {
+    else if (game === "cs2") {
 
-    preview.innerHTML =
-        '<img src="./csgo.JPG" alt="Counter-Strike 2">';
+        preview.innerHTML =
+            '<img src="./csgo.JPG" alt="Counter-Strike 2">';
 
-}
+    }
 
-else if (game === "pubg") {
+    else if (game === "pubg") {
 
-    preview.innerHTML =
-        '<img src="./pubg.JPG" alt="PUBG: BATTLEGROUNDS">';
+        preview.innerHTML =
+            '<img src="./pubg.JPG" alt="PUBG: BATTLEGROUNDS">';
 
-}
+    }
 
-else if (game === "r6s") {
+    else if (game === "r6s") {
 
-    preview.innerHTML =
-        '<img src="./r6s.JPG" alt="Rainbow Six Siege">';
+        preview.innerHTML =
+            '<img src="./r6s.JPG" alt="Rainbow Six Siege">';
 
-}
+    }
 
-else if (game === "rust") {
+    else if (game === "rust") {
 
-    preview.innerHTML =
-        '<img src="./rust.WEBP" alt="Rust">';
+        preview.innerHTML =
+            '<img src="./rust.WEBP" alt="Rust">';
 
-}
+    }
 
     else {
 
@@ -3008,28 +3008,40 @@ function calculateFPS() {
 
             <div class="performance-wrapper">
 
-    <div class="performance-bar">
+                <div class="performance-bar">
 
-        <div
-            class="performance-fill"
-            style="
-                --performance-width:
-                ${performance}%;
-            "
-        ></div>
+                    <div
+                        class="performance-fill"
+                        style="
+                            --performance-width:
+                            ${performance}%;
+                        "
+                    ></div>
 
-    </div>
+                </div>
 
-    <div class="performance-scale">
 
-        <span class="scale-30">30</span>
-        <span class="scale-60">60</span>
-        <span class="scale-120">120</span>
-        <span class="scale-240">240</span>
+                <div class="performance-scale">
 
-    </div>
+                    <span class="scale-30">
+                        30
+                    </span>
 
-</div>
+                    <span class="scale-60">
+                        60
+                    </span>
+
+                    <span class="scale-120">
+                        120
+                    </span>
+
+                    <span class="scale-240">
+                        240
+                    </span>
+
+                </div>
+
+            </div>
 
 
             <div class="data-note">
