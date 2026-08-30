@@ -2114,15 +2114,28 @@ function applyRayTracing(
    FRAME GENERATION
 ========================================================= */
 
-function applyFrameGeneration(fps) {
+function applyFrameGeneration(fps, gpu) {
 
     /*
-       FG aumenta los FPS mostrados,
-       pero no equivale a un aumento real
-       de rendimiento de renderizado.
+       RTX 50 → estimación con DLSS Multi Frame Generation
+       RTX 40 → Frame Generation tradicional
 
-       1.50 es una estimación moderada.
+       RTX 50: x1.65
+       RTX 40: x1.50
     */
+
+    if (
+        gpu === "rtx5060" ||
+        gpu === "rtx5070" ||
+        gpu === "rtx5070ti" ||
+        gpu === "rtx5080"
+    ) {
+
+        return Math.round(
+            fps * 1.65
+        );
+
+    }
 
     return Math.round(
         fps * 1.50
@@ -2692,12 +2705,13 @@ function calculateFPS() {
 
         if (frameGeneration) {
 
-            fps =
-                applyFrameGeneration(
-                    fps
-                );
+    fps =
+        applyFrameGeneration(
+            fps,
+            gpu
+        );
 
-        }
+}
 
     }
 
