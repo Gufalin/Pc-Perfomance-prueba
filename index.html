@@ -2,6 +2,7 @@
 <html lang="es">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,18 +10,38 @@
 
 <title>Calculadora de FPS para PC | PC Performance</title>
 
-<meta name="description" content="Calcula los FPS aproximados de tu PC en juegos como Fortnite, Cyberpunk 2077, Warzone, Elden Ring y más. Selecciona tu GPU, CPU, resolución y calidad gráfica.">
+<meta
+    name="description"
+    content="Calcula los FPS aproximados de tu PC en juegos como Fortnite, Cyberpunk 2077, Warzone, Elden Ring y más."
+>
 
 <meta name="robots" content="index, follow">
 
-<link rel="canonical" href="https://gufalin.github.io/Pc-Perfomance/">
+<link
+    rel="canonical"
+    href="https://gufalin.github.io/Pc-Perfomance/"
+>
 
 <meta property="og:title" content="Calculadora de FPS para PC | PC Performance">
-<meta property="og:description" content="Calcula el rendimiento aproximado de tu PC en tus juegos favoritos según tu GPU, CPU, resolución y calidad gráfica.">
+
+<meta
+    property="og:description"
+    content="Calcula el rendimiento aproximado de tu PC en tus juegos favoritos según tu GPU, CPU, resolución y calidad gráfica."
+>
+
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://gufalin.github.io/Pc-Perfomance/">
+
+<meta
+    property="og:url"
+    content="https://gufalin.github.io/Pc-Perfomance/"
+>
+
 
 <style>
+
+/* =========================================================
+   RESET
+========================================================= */
 
 * {
     box-sizing: border-box;
@@ -31,7 +52,9 @@ html {
 }
 
 body {
+
     margin: 0;
+
     font-family: Arial, sans-serif;
 
     background:
@@ -43,21 +66,43 @@ body {
         #0b0d12;
 
     color: white;
+
     text-align: center;
+
     min-height: 100vh;
+
+    overflow-x: hidden;
 }
 
+
+/* =========================================================
+   CONTENEDOR
+========================================================= */
+
 .container {
+
     width: 100%;
+
     max-width: 900px;
+
     margin: 0 auto;
+
     padding: 55px 20px 70px;
 }
 
+
+/* =========================================================
+   TITULO
+========================================================= */
+
 h1 {
+
     margin: 0;
+
     font-size: clamp(34px,6vw,52px);
+
     font-weight: 800;
+
     letter-spacing: -1.5px;
 
     background:
@@ -73,16 +118,27 @@ h1 {
     color: transparent;
 }
 
+
 p {
+
     margin-top: 12px;
+
     color: #858b9b;
+
     font-size: 15px;
 }
 
+
+/* =========================================================
+   CALCULADORA
+========================================================= */
+
 .calculator {
+
     position: relative;
 
     margin-top: 38px;
+
     padding: 30px;
 
     background:
@@ -93,6 +149,7 @@ p {
         );
 
     border: 1px solid rgba(255,255,255,0.07);
+
     border-radius: 22px;
 
     box-shadow:
@@ -103,12 +160,15 @@ p {
 }
 
 .calculator::before {
+
     content: "";
 
     position: absolute;
 
     top: 0;
+
     left: 10%;
+
     right: 10%;
 
     height: 1px;
@@ -122,33 +182,44 @@ p {
         );
 }
 
+
+/* =========================================================
+   FORM GRID
+========================================================= */
+
 .form-grid {
+
     display: grid;
+
     grid-template-columns: 1fr 1fr;
+
     gap: 14px;
+
     width: 100%;
 }
 
 .form-full {
+
     grid-column: 1 / -1;
 }
 
 
 /* =========================================================
-   BUSCADORES PERSONALIZADOS
+   SELECTOR NORMAL
+   Resolución + Calidad
 ========================================================= */
 
-.search-select {
-    position: relative;
-    width: 100%;
-    min-width: 0;
-}
+select {
 
-.search-select-input {
+    appearance: none;
+
+    -webkit-appearance: none;
+
     width: 100%;
+
     min-height: 54px;
 
-    padding: 0 50px 0 17px;
+    padding: 0 45px 0 17px;
 
     border-radius: 13px;
 
@@ -166,80 +237,190 @@ p {
     color: #dfe2ea;
 
     font-size: 15px;
+
     font-weight: 500;
 
-    cursor: text;
+    cursor: pointer;
+
+    background-image:
+        linear-gradient(
+            45deg,
+            transparent 50%,
+            #777f91 50%
+        ),
+        linear-gradient(
+            135deg,
+            #777f91 50%,
+            transparent 50%
+        );
+
+    background-position:
+        calc(100% - 20px) 50%,
+        calc(100% - 14px) 50%;
+
+    background-size:
+        6px 6px,
+        6px 6px;
+
+    background-repeat: no-repeat;
 
     transition:
         border-color .2s ease,
-        box-shadow .2s ease,
-        background .2s ease;
+        box-shadow .2s ease;
 }
 
-.search-select-input::placeholder {
-    color: #dfe2ea;
-    opacity: 1;
-}
+select:hover {
 
-.search-select-input:hover {
     border-color: #41495a;
 }
 
-.search-select.open .search-select-input {
+select:focus {
+
     border-color: #5865f2;
 
     box-shadow:
         0 0 0 3px rgba(88,101,242,0.12);
 }
 
+select option {
+
+    background: #171a22;
+
+    color: white;
+}
+
+
+/* =========================================================
+   BUSCADORES
+========================================================= */
+
+.search-container {
+
+    position: relative;
+
+    width: 100%;
+
+    min-width: 0;
+
+    z-index: 20;
+}
+
+.search-container.open {
+
+    z-index: 1000;
+}
+
+.search-box {
+
+    width: 100%;
+
+    min-height: 54px;
+
+    padding: 0 45px 0 17px;
+
+    border-radius: 13px;
+
+    border: 1px solid #303644;
+
+    outline: none;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1b1f29,
+            #151820
+        );
+
+    color: #dfe2ea;
+
+    font-size: 15px;
+
+    font-weight: 500;
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease;
+}
+
+.search-box::placeholder {
+
+    color: #dfe2ea;
+
+    opacity: 1;
+}
+
+.search-box:hover {
+
+    border-color: #41495a;
+}
+
+.search-container.open .search-box {
+
+    border-color: #5865f2;
+
+    box-shadow:
+        0 0 0 3px rgba(88,101,242,0.12);
+}
+
+
+/* =========================================================
+   LUPA
+========================================================= */
+
 .search-icon {
+
     position: absolute;
 
-    right: 16px;
-    top: 50%;
+    right: 15px;
 
-    width: 19px;
-    height: 19px;
+    top: 50%;
 
     transform: translateY(-50%);
 
+    width: 22px;
+
+    height: 22px;
+
     pointer-events: none;
 
-    border: 2px solid #858c9d;
+    color: #858c9d;
 
-    border-radius: 50%;
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
 }
 
-.search-icon::after {
-    content: "";
+.search-icon svg {
 
-    position: absolute;
+    width: 21px;
 
-    width: 8px;
-    height: 2px;
+    height: 21px;
 
-    right: -6px;
-    bottom: -3px;
+    stroke: currentColor;
 
-    background: #858c9d;
+    stroke-width: 2;
 
-    border-radius: 2px;
-
-    transform: rotate(45deg);
+    fill: none;
 }
 
-.search-select-dropdown {
+
+/* =========================================================
+   LISTA BUSCADOR
+========================================================= */
+
+.search-dropdown {
+
     position: absolute;
 
     top: calc(100% + 7px);
+
     left: 0;
-    right: 0;
 
-    z-index: 1000;
+    width: 100%;
 
-    display: none;
-
-    max-height: 300px;
+    max-height: 260px;
 
     overflow-y: auto;
 
@@ -248,24 +429,31 @@ p {
     background:
         linear-gradient(
             145deg,
-            #1d212b,
-            #151820
+            #202531,
+            #171a22
         );
 
-    border: 1px solid #343b4b;
+    border: 1px solid rgba(255,255,255,.10);
 
     border-radius: 13px;
 
     box-shadow:
-        0 18px 45px rgba(0,0,0,.5),
-        0 5px 15px rgba(0,0,0,.25);
+        0 18px 45px rgba(0,0,0,.45);
+
+    display: none;
+
+    z-index: 9999;
+
+    text-align: left;
 }
 
-.search-select.open .search-select-dropdown {
+.search-container.open .search-dropdown {
+
     display: block;
 }
 
 .search-option {
+
     width: 100%;
 
     min-height: 44px;
@@ -274,19 +462,19 @@ p {
 
     align-items: center;
 
-    padding: 8px 11px;
+    gap: 10px;
+
+    padding: 8px 10px;
 
     border-radius: 9px;
 
     color: #dfe2ea;
 
-    font-size: 14px;
-
-    text-align: left;
+    background: transparent;
 
     cursor: pointer;
 
-    user-select: none;
+    font-size: 14px;
 
     transition:
         background .15s ease,
@@ -294,24 +482,18 @@ p {
 }
 
 .search-option:hover,
-.search-option.highlighted {
-    background: rgba(88,101,242,.15);
-    color: white;
-}
-
 .search-option.selected {
-    background: rgba(88,101,242,.20);
+
+    background: rgba(88,101,242,.16);
+
     color: white;
 }
 
-.search-no-results {
-    padding: 15px 10px;
+.search-option.no-results {
 
     color: #777f90;
 
-    font-size: 13px;
-
-    text-align: center;
+    cursor: default;
 }
 
 
@@ -322,6 +504,7 @@ p {
 .game-container,
 .gpu-container,
 .cpu-container {
+
     display: flex;
 
     align-items: center;
@@ -329,6 +512,7 @@ p {
     gap: 10px;
 
     width: 100%;
+
     min-width: 0;
 
     position: relative;
@@ -358,6 +542,7 @@ p {
 .game-container:hover,
 .gpu-container:hover,
 .cpu-container:hover {
+
     border-color: rgba(255,255,255,0.13);
 
     box-shadow:
@@ -368,6 +553,7 @@ p {
 .game-container:focus-within,
 .gpu-container:focus-within,
 .cpu-container:focus-within {
+
     border-color: rgba(88,101,242,0.75);
 
     box-shadow:
@@ -375,10 +561,17 @@ p {
         0 8px 25px rgba(0,0,0,0.2);
 }
 
-.game-container .search-select,
-.gpu-container .search-select,
-.cpu-container .search-select {
+
+/* =========================================================
+   BUSCADOR DENTRO DEL CONTENEDOR
+========================================================= */
+
+.game-container .search-container,
+.gpu-container .search-container,
+.cpu-container .search-container {
+
     flex: 1;
+
     min-width: 0;
 }
 
@@ -388,13 +581,17 @@ p {
 ========================================================= */
 
 #game-preview {
+
     width: 51px;
+
     height: 48px;
 
     margin-right: 3px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     flex-shrink: 0;
@@ -414,7 +611,9 @@ p {
 }
 
 #game-preview img {
+
     width: 40px;
+
     height: 40px;
 
     object-fit: contain;
@@ -429,17 +628,20 @@ p {
 
 
 /* =========================================================
-   GPU
+   GPU PREVIEW
 ========================================================= */
 
 #gpu-preview {
+
     flex: 0 0 155px;
 }
 
 .gpu-info {
+
     min-height: 48px;
 
     display: flex;
+
     align-items: center;
 
     gap: 9px;
@@ -461,7 +663,9 @@ p {
 }
 
 .gpu-info img {
+
     width: 43px;
+
     height: 37px;
 
     object-fit: contain;
@@ -473,18 +677,25 @@ p {
 }
 
 .gpu-info div {
+
     display: flex;
+
     flex-direction: column;
+
     min-width: 0;
 }
 
 .gpu-info strong {
+
     font-size: 12px;
+
     color: #f2f4f8;
+
     white-space: nowrap;
 }
 
 .gpu-info span {
+
     margin-top: 3px;
 
     color: #858c9d;
@@ -496,17 +707,21 @@ p {
 
 
 /* =========================================================
-   CPU
+   CPU PREVIEW
 ========================================================= */
 
 #cpu-preview {
+
     width: 51px;
+
     height: 48px;
 
     margin-right: 3px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     flex-shrink: 0;
@@ -524,7 +739,9 @@ p {
 }
 
 #cpu-preview img {
+
     width: 40px;
+
     height: 40px;
 
     object-fit: contain;
@@ -539,86 +756,14 @@ p {
 
 
 /* =========================================================
-   SELECTORES NORMALES
+   SELECTORES SIMPLES
 ========================================================= */
-
-select {
-    appearance: none;
-    -webkit-appearance: none;
-
-    width: 100%;
-    min-height: 54px;
-
-    padding: 0 45px 0 17px;
-
-    border-radius: 13px;
-
-    border: 1px solid #303644;
-
-    outline: none;
-
-    background:
-        linear-gradient(
-            145deg,
-            #1b1f29,
-            #151820
-        );
-
-    color: #dfe2ea;
-
-    font-size: 15px;
-    font-weight: 500;
-
-    cursor: pointer;
-
-    background-image:
-        linear-gradient(
-            45deg,
-            transparent 50%,
-            #777f91 50%
-        ),
-        linear-gradient(
-            135deg,
-            #777f91 50%,
-            transparent 50%
-        );
-
-    background-position:
-        calc(100% - 20px) 50%,
-        calc(100% - 14px) 50%;
-
-    background-size:
-        6px 6px,
-        6px 6px;
-
-    background-repeat: no-repeat;
-
-    transition:
-        border-color .2s ease,
-        background-color .2s ease,
-        box-shadow .2s ease;
-}
-
-select:hover {
-    background-color: #1b1f29;
-    border-color: #41495a;
-}
-
-select:focus {
-    border-color: #5865f2;
-
-    box-shadow:
-        0 0 0 3px rgba(88,101,242,0.12);
-}
-
-select option {
-    background: #171a22;
-    color: white;
-}
 
 #resolution,
 #target {
+
     min-height: 54px;
+
     border-radius: 15px;
 }
 
@@ -628,6 +773,7 @@ select option {
 ========================================================= */
 
 .cyberpunk-options {
+
     display: none;
 
     grid-column: 1 / -1;
@@ -638,6 +784,7 @@ select option {
 }
 
 .cyberpunk-option {
+
     flex: 1;
 
     min-height: 46px;
@@ -645,7 +792,9 @@ select option {
     padding: 0 15px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
     background: #151820;
@@ -657,6 +806,7 @@ select option {
     color: #aeb4c3;
 
     font-size: 13px;
+
     font-weight: 600;
 
     cursor: pointer;
@@ -668,11 +818,14 @@ select option {
 }
 
 .cyberpunk-option:hover {
+
     background: #1a1e27;
+
     border-color: rgba(255,190,80,.35);
 }
 
 .cyberpunk-option.active {
+
     background: rgba(190,125,40,.10);
 
     border-color: rgba(255,190,80,.55);
@@ -681,7 +834,9 @@ select option {
 }
 
 .cyberpunk-option .toggle {
+
     width: 32px;
+
     height: 18px;
 
     position: relative;
@@ -692,14 +847,17 @@ select option {
 }
 
 .cyberpunk-option .toggle::after {
+
     content: "";
 
     position: absolute;
 
     width: 12px;
+
     height: 12px;
 
     top: 3px;
+
     left: 3px;
 
     background: #858b99;
@@ -712,20 +870,24 @@ select option {
 }
 
 .cyberpunk-option.active .toggle {
+
     background: rgba(190,125,40,.65);
 }
 
 .cyberpunk-option.active .toggle::after {
+
     transform: translateX(14px);
+
     background: white;
 }
 
 
 /* =========================================================
-   BOTÓN
+   BOTON
 ========================================================= */
 
 button {
+
     width: 100%;
 
     min-height: 64px;
@@ -748,6 +910,7 @@ button {
     color: white;
 
     font-size: 15px;
+
     font-weight: 800;
 
     letter-spacing: 1px;
@@ -765,6 +928,7 @@ button {
 }
 
 button:hover {
+
     transform: translateY(-2px);
 
     filter: brightness(1.12);
@@ -775,6 +939,7 @@ button:hover {
 }
 
 button:active {
+
     transform: translateY(0);
 }
 
@@ -784,10 +949,12 @@ button:active {
 ========================================================= */
 
 #result {
+
     margin-top: 25px;
 }
 
 .result-card {
+
     position: relative;
 
     margin-top: 25px;
@@ -815,12 +982,15 @@ button:active {
 }
 
 .result-card::before {
+
     content: "";
 
     position: absolute;
 
     top: 0;
+
     left: 15%;
+
     right: 15%;
 
     height: 1px;
@@ -835,15 +1005,18 @@ button:active {
 }
 
 .result-card h2 {
+
     margin: 0;
 
     font-size: 17px;
+
     font-weight: 600;
 
     color: #aeb4c3;
 }
 
 .fps-number {
+
     margin: 8px 0 8px;
 
     font-size: clamp(42px,8vw,58px);
@@ -859,12 +1032,16 @@ button:active {
 }
 
 .fps-label {
+
     color: #777f90;
+
     font-size: 12px;
+
     margin-bottom: 18px;
 }
 
 .result-info {
+
     margin-top: 8px;
 
     color: #8f96a6;
@@ -873,6 +1050,7 @@ button:active {
 }
 
 .result-row {
+
     display: flex;
 
     align-items: center;
@@ -886,21 +1064,28 @@ button:active {
 }
 
 .result-row:last-child {
+
     border-bottom: none;
 }
 
 .result-row span {
+
     color: #777f90;
 
     font-size: 13px;
+
     font-weight: 500;
 }
 
 .result-row strong {
+
     color: #e8ebf2;
 
     font-size: 13px;
+
     font-weight: 600;
+
+    text-align: right;
 }
 
 
@@ -909,15 +1094,17 @@ button:active {
 ========================================================= */
 
 .performance-wrapper {
+
     width: 100%;
+
     margin-top: 20px;
 }
 
 .performance-bar {
-    width: 100%;
-    height: 12px;
 
-    margin-top: 0;
+    width: 100%;
+
+    height: 12px;
 
     background: #10131a;
 
@@ -929,6 +1116,7 @@ button:active {
 }
 
 .performance-fill {
+
     height: 100%;
 
     width: var(--performance-width);
@@ -952,9 +1140,11 @@ button:active {
 }
 
 .performance-scale {
+
     position: relative;
 
     width: 100%;
+
     height: 22px;
 
     margin-top: 7px;
@@ -965,6 +1155,7 @@ button:active {
 }
 
 .performance-scale span {
+
     position: absolute;
 
     top: 0;
@@ -973,11 +1164,13 @@ button:active {
 }
 
 .performance-scale span::before {
+
     content: "";
 
     position: absolute;
 
     width: 1px;
+
     height: 7px;
 
     background: #4a5060;
@@ -988,26 +1181,35 @@ button:active {
 }
 
 .scale-30 {
+
     left: 12.5%;
+
     transform: translateX(-50%);
 }
 
 .scale-60 {
+
     left: 25%;
+
     transform: translateX(-50%);
 }
 
 .scale-120 {
+
     left: 50%;
+
     transform: translateX(-50%);
 }
 
 .scale-240 {
+
     right: 0;
+
     transform: translateX(0);
 }
 
 .scale-240::before {
+
     left: 100%;
 }
 
@@ -1017,6 +1219,7 @@ button:active {
 ========================================================= */
 
 .data-note {
+
     margin-top: 18px;
 
     color: #676e7d;
@@ -1027,6 +1230,7 @@ button:active {
 }
 
 .vram-warning {
+
     margin-top: 16px;
 
     padding: 11px 13px;
@@ -1054,180 +1258,52 @@ button:active {
 @keyframes previewAppear {
 
     from {
+
         opacity: 0;
+
         transform: scale(.85);
     }
 
     to {
+
         opacity: 1;
+
         transform: scale(1);
     }
-
 }
 
 @keyframes resultAppear {
 
     from {
+
         opacity: 0;
+
         transform:
             translateY(8px)
             scale(.98);
     }
 
     to {
+
         opacity: 1;
+
         transform:
             translateY(0)
             scale(1);
     }
-
 }
 
 @keyframes fillPerformance {
 
     from {
+
         width: 0;
     }
 
     to {
+
         width: var(--performance-width);
     }
-
-}
-
-
-/* =========================================================
-   MÓVIL
-========================================================= */
-
-@media (max-width:600px) {
-
-    .container {
-        padding:
-            32px 12px 50px;
-    }
-
-    h1 {
-        font-size: 34px;
-    }
-
-    p {
-        font-size: 14px;
-    }
-
-    .calculator {
-        margin-top: 28px;
-
-        padding: 17px;
-
-        border-radius: 18px;
-    }
-
-    .form-grid {
-        grid-template-columns: 1fr;
-
-        gap: 11px;
-    }
-
-    .form-full {
-        grid-column: auto;
-    }
-
-    .search-select-input,
-    select {
-        min-height: 52px;
-        font-size: 14px;
-    }
-
-    .search-icon {
-        right: 15px;
-
-        width: 20px;
-        height: 20px;
-    }
-
-    .search-select-dropdown {
-        max-height: 280px;
-    }
-
-    .search-option {
-        min-height: 46px;
-        font-size: 14px;
-    }
-
-    #gpu-preview {
-        flex: 0 0 135px;
-    }
-
-    .gpu-info {
-        min-height: 52px;
-        padding: 5px 7px;
-    }
-
-    .gpu-info img {
-        width: 40px;
-        height: 36px;
-    }
-
-    .gpu-info strong {
-        font-size: 11px;
-    }
-
-    .gpu-info span {
-        font-size: 9px;
-    }
-
-    #game-preview,
-    #cpu-preview {
-        width: 48px;
-        height: 46px;
-    }
-
-    #game-preview img,
-    #cpu-preview img {
-        width: 38px;
-        height: 38px;
-    }
-
-    button {
-        min-height: 58px;
-        margin-top: 17px;
-    }
-
-    .result-card {
-        padding: 24px 17px;
-    }
-
-    .fps-number {
-        font-size: 44px;
-    }
-
-    .cyberpunk-options {
-        flex-direction: column;
-    }
-
-    .cyberpunk-option {
-        width: 100%;
-    }
-
-}
-
-
-/* =========================================================
-   MÓVIL HORIZONTAL
-========================================================= */
-
-@media (min-width:601px) and (max-height:500px) {
-
-    .container {
-        padding-top: 25px;
-        padding-bottom: 40px;
-    }
-
-    h1 {
-        font-size: 36px;
-    }
-
 }
 
 
@@ -1236,54 +1312,246 @@ button:active {
 ========================================================= */
 
 .seo-content {
+
     max-width: 900px;
+
     margin: 55px auto 0;
+
     padding: 0 20px 70px;
+
     text-align: left;
 }
 
 .seo-content h2 {
+
     margin-top: 42px;
+
     margin-bottom: 12px;
 
     font-size: 24px;
+
     font-weight: 750;
 
     color: #f2f4f8;
 }
 
 .seo-content p {
+
     margin: 0 0 18px;
 
     color: #858b9b;
 
     font-size: 15px;
+
     line-height: 1.75;
 }
 
+
+/* =========================================================
+   MOVIL
+========================================================= */
+
 @media (max-width:600px) {
 
+    .container {
+
+        padding:
+            32px 12px 50px;
+    }
+
+    h1 {
+
+        font-size: 34px;
+    }
+
+    p {
+
+        font-size: 14px;
+    }
+
+    .calculator {
+
+        margin-top: 28px;
+
+        padding: 17px;
+
+        border-radius: 18px;
+    }
+
+    .form-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 11px;
+    }
+
+    .form-full {
+
+        grid-column: auto;
+    }
+
+    select {
+
+        min-height: 52px;
+
+        font-size: 14px;
+    }
+
+    .search-box {
+
+        min-height: 52px;
+
+        font-size: 14px;
+    }
+
+    .search-icon {
+
+        right: 13px;
+
+        width: 23px;
+
+        height: 23px;
+    }
+
+    .search-icon svg {
+
+        width: 22px;
+
+        height: 22px;
+    }
+
+    .search-dropdown {
+
+        max-height: 245px;
+    }
+
+    .search-option {
+
+        min-height: 46px;
+
+        font-size: 14px;
+    }
+
+    #gpu-preview {
+
+        flex: 0 0 135px;
+    }
+
+    .gpu-info {
+
+        min-height: 52px;
+
+        padding: 5px 7px;
+    }
+
+    .gpu-info img {
+
+        width: 40px;
+
+        height: 36px;
+    }
+
+    .gpu-info strong {
+
+        font-size: 11px;
+    }
+
+    .gpu-info span {
+
+        font-size: 9px;
+    }
+
+    #game-preview,
+    #cpu-preview {
+
+        width: 48px;
+
+        height: 46px;
+    }
+
+    #game-preview img,
+    #cpu-preview img {
+
+        width: 38px;
+
+        height: 38px;
+    }
+
+    button {
+
+        min-height: 58px;
+
+        margin-top: 17px;
+    }
+
+    .result-card {
+
+        padding: 24px 17px;
+    }
+
+    .fps-number {
+
+        font-size: 44px;
+    }
+
+    .cyberpunk-options {
+
+        flex-direction: column;
+    }
+
+    .cyberpunk-option {
+
+        width: 100%;
+    }
+
     .seo-content {
+
         margin-top: 40px;
+
         padding: 0 17px 50px;
     }
 
     .seo-content h2 {
+
         font-size: 21px;
     }
 
     .seo-content p {
+
         font-size: 14px;
+
         line-height: 1.7;
     }
 
 }
 
+
+/* =========================================================
+   MOVIL HORIZONTAL
+========================================================= */
+
+@media (min-width:601px) and (max-height:500px) {
+
+    .container {
+
+        padding-top: 25px;
+
+        padding-bottom: 40px;
+    }
+
+    h1 {
+
+        font-size: 36px;
+    }
+}
+
 </style>
+
 </head>
 
 
 <body>
+
 
 <div class="container">
 
@@ -1306,29 +1574,52 @@ button:active {
             <div class="game-container form-full">
 
                 <div
-                    class="search-select"
-                    id="game-search"
-                    data-type="game"
+                    class="search-container"
+                    id="game-search-container"
                 >
 
                     <input
                         type="text"
-                        class="search-select-input"
-                        id="game-input"
+                        id="game-search"
+                        class="search-box"
                         placeholder="Juego..."
                         autocomplete="off"
                         inputmode="search"
                         aria-label="Buscar juego"
                     >
 
-                    <div class="search-icon"></div>
+                    <div class="search-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+
+                            <circle
+                                cx="11"
+                                cy="11"
+                                r="6.5"
+                            ></circle>
+
+                            <line
+                                x1="16"
+                                y1="16"
+                                x2="21"
+                                y2="21"
+                            ></line>
+
+                        </svg>
+
+                    </div>
+
 
                     <div
-                        class="search-select-dropdown"
+                        class="search-dropdown"
                         id="game-dropdown"
                     ></div>
 
                 </div>
+
 
                 <div id="game-preview"></div>
 
@@ -1342,29 +1633,52 @@ button:active {
             <div class="gpu-container">
 
                 <div
-                    class="search-select"
-                    id="gpu-search"
-                    data-type="gpu"
+                    class="search-container"
+                    id="gpu-search-container"
                 >
 
                     <input
                         type="text"
-                        class="search-select-input"
-                        id="gpu-input"
+                        id="gpu-search"
+                        class="search-box"
                         placeholder="GPU..."
                         autocomplete="off"
                         inputmode="search"
                         aria-label="Buscar GPU"
                     >
 
-                    <div class="search-icon"></div>
+                    <div class="search-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+
+                            <circle
+                                cx="11"
+                                cy="11"
+                                r="6.5"
+                            ></circle>
+
+                            <line
+                                x1="16"
+                                y1="16"
+                                x2="21"
+                                y2="21"
+                            ></line>
+
+                        </svg>
+
+                    </div>
+
 
                     <div
-                        class="search-select-dropdown"
+                        class="search-dropdown"
                         id="gpu-dropdown"
                     ></div>
 
                 </div>
+
 
                 <div id="gpu-preview"></div>
 
@@ -1378,29 +1692,52 @@ button:active {
             <div class="cpu-container">
 
                 <div
-                    class="search-select"
-                    id="cpu-search"
-                    data-type="cpu"
+                    class="search-container"
+                    id="cpu-search-container"
                 >
 
                     <input
                         type="text"
-                        class="search-select-input"
-                        id="cpu-input"
+                        id="cpu-search"
+                        class="search-box"
                         placeholder="CPU..."
                         autocomplete="off"
                         inputmode="search"
                         aria-label="Buscar CPU"
                     >
 
-                    <div class="search-icon"></div>
+                    <div class="search-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+
+                            <circle
+                                cx="11"
+                                cy="11"
+                                r="6.5"
+                            ></circle>
+
+                            <line
+                                x1="16"
+                                y1="16"
+                                x2="21"
+                                y2="21"
+                            ></line>
+
+                        </svg>
+
+                    </div>
+
 
                     <div
-                        class="search-select-dropdown"
+                        class="search-dropdown"
                         id="cpu-dropdown"
                     ></div>
 
                 </div>
+
 
                 <div id="cpu-preview"></div>
 
@@ -1409,6 +1746,7 @@ button:active {
 
             <!-- =================================================
                  RESOLUCIÓN
+                 SELECTOR NORMAL
             ================================================== -->
 
             <select id="resolution">
@@ -1434,6 +1772,7 @@ button:active {
 
             <!-- =================================================
                  CALIDAD
+                 SELECTOR NORMAL
             ================================================== -->
 
             <select id="target">
@@ -1513,12 +1852,14 @@ button:active {
 
 
 <!-- =========================================================
-     SEO CONTENT
+     SEO
 ========================================================= -->
 
 <section class="seo-content">
 
-    <h2>Calculadora de FPS para PC</h2>
+    <h2>
+        Calculadora de FPS para PC
+    </h2>
 
     <p>
         PC Performance es una calculadora de rendimiento que permite
@@ -1528,7 +1869,9 @@ button:active {
     </p>
 
 
-    <h2>¿Cómo calcular los FPS de mi PC?</h2>
+    <h2>
+        ¿Cómo calcular los FPS de mi PC?
+    </h2>
 
     <p>
         Selecciona el juego que quieres probar, tu GPU, tu CPU,
@@ -1544,7 +1887,9 @@ button:active {
     </p>
 
 
-    <h2>¿Qué GPU necesito para jugar?</h2>
+    <h2>
+        ¿Qué GPU necesito para jugar?
+    </h2>
 
     <p>
         La tarjeta gráfica es uno de los componentes que más influye
@@ -1555,7 +1900,9 @@ button:active {
     </p>
 
 
-    <h2>¿Qué resolución debería utilizar?</h2>
+    <h2>
+        ¿Qué resolución debería utilizar?
+    </h2>
 
     <p>
         1080p ofrece una mayor cantidad de FPS y suele requerir menos
@@ -1566,7 +1913,9 @@ button:active {
     </p>
 
 
-    <h2>FPS en juegos</h2>
+    <h2>
+        FPS en juegos
+    </h2>
 
     <p>
         Puedes utilizar la calculadora para comparar el rendimiento
@@ -1581,7 +1930,6 @@ button:active {
 
 
 <script>
-
 
 /* =========================================================
    DATOS BASE
@@ -1869,73 +2217,7 @@ const baseData = {
 
 
 /* =========================================================
-   NOMBRES DE JUEGOS
-========================================================= */
-
-const gameNames = {
-
-    cs2: "Counter-Strike 2",
-
-    cyberpunk: "Cyberpunk 2077",
-
-    eldenring: "Elden Ring",
-
-    fortnite: "Fortnite",
-
-    gta5: "Grand Theft Auto V",
-
-    pubg: "PUBG: BATTLEGROUNDS",
-
-    r6s: "Rainbow Six Siege",
-
-    rdr2: "Red Dead Redemption 2",
-
-    rust: "Rust",
-
-    tlou2: "The Last of Us Part II",
-
-    valorant: "Valorant",
-
-    warzone: "Warzone (Call of Duty)"
-
-};
-
-
-/* =========================================================
-   IMÁGENES JUEGOS
-========================================================= */
-
-const gameImages = {
-
-    fortnite: "./fortnite.PNG",
-
-    cyberpunk: "./cyberpunk.JPG",
-
-    warzone: "./warzone.PNG",
-
-    eldenring: "./elden-ring.JPG",
-
-    valorant: "./valorant.JPG",
-
-    rdr2: "./rdr2.JPG",
-
-    tlou2: "./tlou2.png",
-
-    gta5: "./gta5.WEBP",
-
-    cs2: "./csgo.JPG",
-
-    pubg: "./pubg.JPG",
-
-    r6s: "./r6s.JPG",
-
-    rust: "./rust.WEBP"
-
-};
-
-
-/* =========================================================
-   GPU
+   GPU FACTORS
 ========================================================= */
 
 const gpuFactors = {
@@ -2021,65 +2303,7 @@ const gpuVRAM = {
 
 
 /* =========================================================
-   AVISO VRAM
-========================================================= */
-
-function getVRAMWarning(game, gpu, resolution) {
-
-    const vramGB =
-        parseInt(gpuVRAM[gpu]);
-
-    if (!vramGB) {
-        return "";
-    }
-
-    let limit = 0;
-
-    if (resolution === "1080") {
-        limit = 6;
-    }
-
-    else if (resolution === "1440") {
-        limit = 8;
-    }
-
-    else if (resolution === "2160") {
-        limit = 10;
-    }
-
-    if (
-        game === "cyberpunk" ||
-        game === "tlou2"
-    ) {
-
-        if (resolution === "1440") {
-            limit = 10;
-        }
-
-        else if (resolution === "2160") {
-            limit = 12;
-        }
-
-    }
-
-    if (vramGB <= limit) {
-
-        return `
-            <div class="vram-warning">
-                La VRAM puede ser un factor limitante
-                en esta configuración.
-            </div>
-        `;
-
-    }
-
-    return "";
-
-}
-
-
-/* =========================================================
-   CPU
+   CPU FACTORS
 ========================================================= */
 
 const cpuFactors = {
@@ -2194,7 +2418,7 @@ const gpuNames = {
 
 
 /* =========================================================
-   IMÁGENES GPU
+   IMAGENES GPU
 ========================================================= */
 
 const gpuImages = {
@@ -2276,7 +2500,7 @@ const cpuNames = {
 
 
 /* =========================================================
-   IMÁGENES CPU
+   IMAGENES CPU
 ========================================================= */
 
 const cpuImages = {
@@ -2330,494 +2554,252 @@ const cpuImages = {
 
 
 /* =========================================================
-   OPCIONES DE LOS BUSCADORES
+   NOMBRES DE JUEGOS
 ========================================================= */
 
-const searchOptions = {
+const gameNames = {
 
-    game: Object.keys(gameNames).map(value => ({
-        value: value,
-        label: gameNames[value]
-    })),
+    cs2:
+        "Counter-Strike 2",
 
-    gpu: Object.keys(gpuNames).map(value => ({
-        value: value,
-        label: gpuNames[value]
-    })),
+    cyberpunk:
+        "Cyberpunk 2077",
 
-    cpu: Object.keys(cpuNames).map(value => ({
-        value: value,
-        label: cpuNames[value]
-    }))
+    eldenring:
+        "Elden Ring",
+
+    fortnite:
+        "Fortnite",
+
+    gta5:
+        "Grand Theft Auto V",
+
+    pubg:
+        "PUBG: BATTLEGROUNDS",
+
+    r6s:
+        "Rainbow Six Siege",
+
+    rdr2:
+        "Red Dead Redemption 2",
+
+    rust:
+        "Rust",
+
+    tlou2:
+        "The Last of Us Part II",
+
+    valorant:
+        "Valorant",
+
+    warzone:
+        "Warzone (Call of Duty)"
 
 };
 
 
 /* =========================================================
-   ESTADO DE LOS BUSCADORES
+   IMAGENES JUEGOS
 ========================================================= */
 
-const searchState = {
+const gameImages = {
 
-    game: {
-        value: "",
-        highlighted: -1
-    },
+    fortnite:
+        "./fortnite.PNG",
 
-    gpu: {
-        value: "",
-        highlighted: -1
-    },
+    cyberpunk:
+        "./cyberpunk.JPG",
 
-    cpu: {
-        value: "",
-        highlighted: -1
-    }
+    warzone:
+        "./warzone.PNG",
+
+    eldenring:
+        "./elden-ring.JPG",
+
+    valorant:
+        "./valorant.JPG",
+
+    rdr2:
+        "./rdr2.JPG",
+
+    tlou2:
+        "./tlou2.png",
+
+    gta5:
+        "./gta5.WEBP",
+
+    cs2:
+        "./csgo.JPG",
+
+    pubg:
+        "./pubg.JPG",
+
+    r6s:
+        "./r6s.JPG",
+
+    rust:
+        "./rust.WEBP"
 
 };
 
 
 /* =========================================================
-   CREAR OPCIONES
+   LISTAS PARA LOS BUSCADORES
 ========================================================= */
 
-function renderSearchOptions(type, filter = "") {
+const gameOptions = Object.entries(gameNames).map(
+    ([value, name]) => ({
+        value,
+        name
+    })
+);
 
-    const dropdown =
-        document.getElementById(
-            `${type}-dropdown`
-        );
+const gpuOptions = Object.entries(gpuNames).map(
+    ([value, name]) => ({
+        value,
+        name
+    })
+);
 
-    const normalizedFilter =
-        filter
-            .trim()
-            .toLowerCase();
-
-    const filtered =
-        searchOptions[type].filter(option =>
-            option.label
-                .toLowerCase()
-                .includes(normalizedFilter)
-        );
-
-    dropdown.innerHTML = "";
-
-    searchState[type].highlighted = -1;
-
-    if (!filtered.length) {
-
-        dropdown.innerHTML = `
-            <div class="search-no-results">
-                No se encontraron resultados
-            </div>
-        `;
-
-        return;
-
-    }
-
-    filtered.forEach((option, index) => {
-
-        const element =
-            document.createElement("div");
-
-        element.className =
-            "search-option";
-
-        if (
-            option.value ===
-            searchState[type].value
-        ) {
-
-            element.classList.add("selected");
-
-        }
-
-        element.dataset.value =
-            option.value;
-
-        element.textContent =
-            option.label;
-
-        element.addEventListener(
-            "mousedown",
-            function(event) {
-
-                event.preventDefault();
-
-            }
-        );
-
-        element.addEventListener(
-            "click",
-            function() {
-
-                selectSearchOption(
-                    type,
-                    option.value
-                );
-
-            }
-        );
-
-        dropdown.appendChild(element);
-
-    });
-
-}
+const cpuOptions = Object.entries(cpuNames).map(
+    ([value, name]) => ({
+        value,
+        name
+    })
+);
 
 
 /* =========================================================
-   ABRIR BUSCADOR
+   ESTADO
 ========================================================= */
 
-function openSearch(type) {
+let selectedGame = "";
 
-    closeAllSearches(type);
+let selectedGPU = "";
 
-    const wrapper =
-        document.getElementById(
-            `${type}-search`
-        );
-
-    const input =
-        document.getElementById(
-            `${type}-input`
-        );
-
-    wrapper.classList.add("open");
-
-    renderSearchOptions(
-        type,
-        input.value
-    );
-
-}
+let selectedCPU = "";
 
 
 /* =========================================================
-   CERRAR TODOS
+   BUSCADOR GENERICO
 ========================================================= */
 
-function closeAllSearches(exception = null) {
-
-    document
-        .querySelectorAll(".search-select")
-        .forEach(wrapper => {
-
-            const type =
-                wrapper.dataset.type;
-
-            if (type !== exception) {
-
-                wrapper.classList.remove("open");
-
-                searchState[type].highlighted = -1;
-
-            }
-
-        });
-
-}
-
-
-/* =========================================================
-   SELECCIONAR OPCIÓN
-========================================================= */
-
-function selectSearchOption(type, value) {
-
-    const state =
-        searchState[type];
-
-    state.value = value;
-
-    state.highlighted = -1;
-
-    const input =
-        document.getElementById(
-            `${type}-input`
-        );
-
-    const option =
-        searchOptions[type].find(
-            item => item.value === value
-        );
-
-    if (option) {
-
-        input.value =
-            option.label;
-
-    }
-
-    const wrapper =
-        document.getElementById(
-            `${type}-search`
-        );
-
-    wrapper.classList.remove("open");
-
-
-    if (type === "game") {
-
-        showGame();
-
-    }
-
-    else if (type === "gpu") {
-
-        showGPU();
-
-    }
-
-    else if (type === "cpu") {
-
-        showCPU();
-
-    }
-
-}
-
-
-/* =========================================================
-   LIMPIAR BUSCADOR
-========================================================= */
-
-function clearSearch(type) {
-
-    searchState[type].value = "";
-
-    searchState[type].highlighted = -1;
-
-}
-
-
-/* =========================================================
-   NAVEGACIÓN CON TECLADO
-========================================================= */
-
-function handleSearchKeyboard(
-    event,
-    type
+function setupSearch(
+    inputId,
+    containerId,
+    dropdownId,
+    options,
+    onSelect
 ) {
 
-    const wrapper =
-        document.getElementById(
-            `${type}-search`
-        );
-
     const input =
-        document.getElementById(
-            `${type}-input`
-        );
+        document.getElementById(inputId);
 
-    if (!wrapper.classList.contains("open")) {
-
-        if (
-            event.key === "ArrowDown" ||
-            event.key === "ArrowUp" ||
-            event.key === "Enter"
-        ) {
-
-            event.preventDefault();
-
-            openSearch(type);
-
-        }
-
-        return;
-
-    }
-
-
-    const normalizedFilter =
-        input.value
-            .trim()
-            .toLowerCase();
-
-    const filtered =
-        searchOptions[type].filter(option =>
-            option.label
-                .toLowerCase()
-                .includes(normalizedFilter)
-        );
-
-
-    if (event.key === "ArrowDown") {
-
-        event.preventDefault();
-
-        if (!filtered.length) {
-            return;
-        }
-
-        searchState[type].highlighted =
-            Math.min(
-                searchState[type].highlighted + 1,
-                filtered.length - 1
-            );
-
-        updateHighlightedOption(type);
-
-    }
-
-
-    else if (event.key === "ArrowUp") {
-
-        event.preventDefault();
-
-        if (!filtered.length) {
-            return;
-        }
-
-        searchState[type].highlighted =
-            Math.max(
-                searchState[type].highlighted - 1,
-                0
-            );
-
-        updateHighlightedOption(type);
-
-    }
-
-
-    else if (event.key === "Enter") {
-
-        event.preventDefault();
-
-        const index =
-            searchState[type].highlighted;
-
-        if (
-            index >= 0 &&
-            filtered[index]
-        ) {
-
-            selectSearchOption(
-                type,
-                filtered[index].value
-            );
-
-        }
-
-        else if (filtered.length === 1) {
-
-            selectSearchOption(
-                type,
-                filtered[0].value
-            );
-
-        }
-
-    }
-
-
-    else if (event.key === "Escape") {
-
-        event.preventDefault();
-
-        wrapper.classList.remove("open");
-
-    }
-
-}
-
-
-/* =========================================================
-   DESTACAR OPCIÓN
-========================================================= */
-
-function updateHighlightedOption(type) {
+    const container =
+        document.getElementById(containerId);
 
     const dropdown =
-        document.getElementById(
-            `${type}-dropdown`
-        );
+        document.getElementById(dropdownId);
 
-    const options =
-        dropdown.querySelectorAll(
-            ".search-option"
-        );
 
-    options.forEach(
-        option =>
-            option.classList.remove(
-                "highlighted"
-            )
-    );
-
-    const index =
-        searchState[type].highlighted;
-
-    if (
-        index >= 0 &&
-        options[index]
+    function renderOptions(
+        searchText = ""
     ) {
 
-        options[index].classList.add(
-            "highlighted"
-        );
+        const query =
+            searchText
+                .trim()
+                .toLowerCase();
 
-        options[index].scrollIntoView({
-            block: "nearest"
+
+        const filtered =
+            options.filter(option =>
+                option.name
+                    .toLowerCase()
+                    .includes(query)
+            );
+
+
+        dropdown.innerHTML = "";
+
+
+        if (!filtered.length) {
+
+            const noResults =
+                document.createElement("div");
+
+            noResults.className =
+                "search-option no-results";
+
+            noResults.textContent =
+                "No se encontraron resultados";
+
+            dropdown.appendChild(
+                noResults
+            );
+
+            return;
+        }
+
+
+        filtered.forEach(option => {
+
+            const item =
+                document.createElement("div");
+
+            item.className =
+                "search-option";
+
+
+            item.textContent =
+                option.name;
+
+
+            item.dataset.value =
+                option.value;
+
+
+            item.addEventListener(
+                "mousedown",
+                function(event) {
+
+                    event.preventDefault();
+
+                    onSelect(option);
+
+                    closeAllSearches();
+                }
+            );
+
+
+            dropdown.appendChild(item);
+
         });
 
     }
 
-}
 
+    function open() {
 
-/* =========================================================
-   EVENTOS DE LOS BUSCADORES
-========================================================= */
+        closeAllSearches(container);
 
-["game", "gpu", "cpu"].forEach(type => {
+        container.classList.add("open");
 
-    const wrapper =
-        document.getElementById(
-            `${type}-search`
+        renderOptions(
+            input.value
         );
-
-    const input =
-        document.getElementById(
-            `${type}-input`
-        );
+    }
 
 
     input.addEventListener(
         "focus",
-        function() {
-
-            openSearch(type);
-
-        }
+        open
     );
 
 
     input.addEventListener(
         "click",
-        function(event) {
-
-            event.stopPropagation();
-
-            openSearch(type);
-
-            /*
-               Selecciona el texto solamente cuando
-               ya existe una selección completa.
-            */
-
-            if (
-                searchState[type].value &&
-                input.value
-            ) {
-
-                input.select();
-
-            }
-
-        }
+        open
     );
 
 
@@ -2825,28 +2807,18 @@ function updateHighlightedOption(type) {
         "input",
         function() {
 
-            /*
-               Si el usuario empieza a escribir,
-               ya no mantenemos la selección anterior.
-            */
+            if (
+                !container.classList.contains(
+                    "open"
+                )
+            ) {
 
-            const selectedOption =
-                searchOptions[type].find(
-                    option =>
-                        option.label ===
-                        input.value
+                container.classList.add(
+                    "open"
                 );
-
-            if (!selectedOption) {
-
-                clearSearch(type);
-
             }
 
-            openSearch(type);
-
-            renderSearchOptions(
-                type,
+            renderOptions(
                 input.value
             );
 
@@ -2858,25 +2830,71 @@ function updateHighlightedOption(type) {
         "keydown",
         function(event) {
 
-            handleSearchKeyboard(
-                event,
-                type
-            );
+            if (
+                event.key === "Escape"
+            ) {
+
+                closeAllSearches();
+
+                input.blur();
+
+                return;
+            }
+
+
+            if (
+                event.key === "ArrowDown"
+            ) {
+
+                event.preventDefault();
+
+                const first =
+                    dropdown.querySelector(
+                        ".search-option:not(.no-results)"
+                    );
+
+                if (first) {
+
+                    first.focus();
+                }
+
+            }
 
         }
     );
 
 
-    wrapper.addEventListener(
-        "click",
-        function(event) {
+    renderOptions();
 
-            event.stopPropagation();
+}
 
-        }
-    );
 
-});
+/* =========================================================
+   CERRAR TODOS LOS BUSCADORES
+========================================================= */
+
+function closeAllSearches(
+    exceptContainer = null
+) {
+
+    document
+        .querySelectorAll(
+            ".search-container.open"
+        )
+        .forEach(container => {
+
+            if (
+                container !== exceptContainer
+            ) {
+
+                container.classList.remove(
+                    "open"
+                );
+            }
+
+        });
+
+}
 
 
 /* =========================================================
@@ -2884,17 +2902,16 @@ function updateHighlightedOption(type) {
 ========================================================= */
 
 document.addEventListener(
-    "click",
+    "mousedown",
     function(event) {
 
         if (
             !event.target.closest(
-                ".search-select"
+                ".search-container"
             )
         ) {
 
             closeAllSearches();
-
         }
 
     }
@@ -2902,7 +2919,99 @@ document.addEventListener(
 
 
 /* =========================================================
-   OBTENER FPS BASE
+   SELECCIONAR JUEGO
+========================================================= */
+
+function selectGame(option) {
+
+    selectedGame =
+        option.value;
+
+    const input =
+        document.getElementById(
+            "game-search"
+        );
+
+    input.value =
+        option.name;
+
+    showGame();
+}
+
+
+/* =========================================================
+   SELECCIONAR GPU
+========================================================= */
+
+function selectGPU(option) {
+
+    selectedGPU =
+        option.value;
+
+    const input =
+        document.getElementById(
+            "gpu-search"
+        );
+
+    input.value =
+        option.name;
+
+    showGPU();
+}
+
+
+/* =========================================================
+   SELECCIONAR CPU
+========================================================= */
+
+function selectCPU(option) {
+
+    selectedCPU =
+        option.value;
+
+    const input =
+        document.getElementById(
+            "cpu-search"
+        );
+
+    input.value =
+        option.name;
+
+    showCPU();
+}
+
+
+/* =========================================================
+   INICIAR BUSCADORES
+========================================================= */
+
+setupSearch(
+    "game-search",
+    "game-search-container",
+    "game-dropdown",
+    gameOptions,
+    selectGame
+);
+
+setupSearch(
+    "gpu-search",
+    "gpu-search-container",
+    "gpu-dropdown",
+    gpuOptions,
+    selectGPU
+);
+
+setupSearch(
+    "cpu-search",
+    "cpu-search-container",
+    "cpu-dropdown",
+    cpuOptions,
+    selectCPU
+);
+
+
+/* =========================================================
+   OBTENER FPS
 ========================================================= */
 
 function getFPS(
@@ -2918,24 +3027,32 @@ function getFPS(
         ?. [resolution]
         ?. [target];
 
+
     if (!base) {
+
         return 0;
     }
+
 
     const gpuFactor =
         gpuFactors[gpu] || 1;
 
+
     const cpuFactor =
         cpuFactors[cpu] || 1;
+
 
     const cpuImpact =
         gameCPUImpact[game] || 0.30;
 
+
     const gpuContribution =
         1 - cpuImpact;
 
+
     const cpuContribution =
         cpuImpact;
+
 
     const relativePerformance =
 
@@ -2951,9 +3068,11 @@ function getFPS(
             cpuContribution
         );
 
+
     let result =
         Math.round(
-            base * relativePerformance
+            base *
+            relativePerformance
         );
 
 
@@ -2967,22 +3086,21 @@ function getFPS(
                 result,
                 500
             );
-
     }
 
 
     return result;
-
 }
 
 
 /* =========================================================
-   CREAR RANGO
+   RANGO FPS
 ========================================================= */
 
 function createFPSRange(fps) {
 
     let variation;
+
 
     if (fps < 50) {
 
@@ -3026,6 +3144,7 @@ function createFPSRange(fps) {
 
     }
 
+
     const minimum =
         Math.max(
             1,
@@ -3034,16 +3153,115 @@ function createFPSRange(fps) {
             )
         );
 
+
     const maximum =
         Math.round(
             fps + variation
         );
 
-    return {
-        min: minimum,
-        max: maximum
-    };
 
+    return {
+
+        min: minimum,
+
+        max: maximum
+
+    };
+}
+
+
+/* =========================================================
+   VRAM WARNING
+========================================================= */
+
+function getVRAMWarning(
+    game,
+    gpu,
+    resolution
+) {
+
+    const vramGB =
+        parseInt(
+            gpuVRAM[gpu]
+        );
+
+
+    if (!vramGB) {
+
+        return "";
+    }
+
+
+    let limit = 0;
+
+
+    if (
+        resolution === "1080"
+    ) {
+
+        limit = 6;
+
+    }
+
+    else if (
+        resolution === "1440"
+    ) {
+
+        limit = 8;
+
+    }
+
+    else if (
+        resolution === "2160"
+    ) {
+
+        limit = 10;
+
+    }
+
+
+    if (
+        game === "cyberpunk" ||
+        game === "tlou2"
+    ) {
+
+        if (
+            resolution === "1440"
+        ) {
+
+            limit = 10;
+
+        }
+
+        else if (
+            resolution === "2160"
+        ) {
+
+            limit = 12;
+
+        }
+
+    }
+
+
+    if (
+        vramGB <= limit
+    ) {
+
+        return `
+
+            <div class="vram-warning">
+
+                La VRAM puede ser un factor limitante
+                en esta configuración.
+
+            </div>
+
+        `;
+    }
+
+
+    return "";
 }
 
 
@@ -3061,15 +3279,23 @@ function applyRayTracing(
     const nvidiaLoss = {
 
         cyberpunk: {
+
             "1080": 0.69,
+
             "1440": 0.64,
+
             "2160": 0.58
+
         },
 
         eldenring: {
+
             "1080": 0.82,
+
             "1440": 0.78,
+
             "2160": 0.70
+
         }
 
     };
@@ -3078,15 +3304,23 @@ function applyRayTracing(
     const amdLoss = {
 
         cyberpunk: {
+
             "1080": 0.64,
+
             "1440": 0.59,
+
             "2160": 0.53
+
         },
 
         eldenring: {
+
             "1080": 0.79,
+
             "1440": 0.74,
+
             "2160": 0.66
+
         }
 
     };
@@ -3095,9 +3329,13 @@ function applyRayTracing(
     const amdGPUs = [
 
         "rx7600",
+
         "rx7700xt",
+
         "rx7800xt",
+
         "rx7900xt",
+
         "rx7900xtx"
 
     ];
@@ -3114,15 +3352,21 @@ function applyRayTracing(
 
 
     const gameLoss =
-        lossTable[game] ||
+        lossTable[game]
+        ||
         lossTable.cyberpunk;
 
 
     return Math.round(
-        fps *
-        (gameLoss[resolution] || 0.60)
-    );
 
+        fps *
+        (
+            gameLoss[resolution]
+            ||
+            0.60
+        )
+
+    );
 }
 
 
@@ -3136,6 +3380,7 @@ function applyFrameGeneration(
 ) {
 
     const isRTX50 =
+
         gpu === "rtx5060" ||
         gpu === "rtx5070" ||
         gpu === "rtx5070ti" ||
@@ -3147,14 +3392,12 @@ function applyFrameGeneration(
         return Math.round(
             fps * 1.65
         );
-
     }
 
 
     return Math.round(
         fps * 1.50
     );
-
 }
 
 
@@ -3165,12 +3408,14 @@ function applyFrameGeneration(
 function showGame() {
 
     const game =
-        searchState.game.value;
+        selectedGame;
+
 
     const preview =
         document.getElementById(
             "game-preview"
         );
+
 
     const extraOptions =
         document.getElementById(
@@ -3178,20 +3423,27 @@ function showGame() {
         );
 
 
-    if (gameImages[game]) {
+    if (
+        gameImages[game]
+    ) {
 
         preview.innerHTML =
-            `<img
-                src="${gameImages[game]}"
-                alt="${gameNames[game]}"
-            >`;
+
+            '<img src="' +
+            gameImages[game] +
+            '" alt="' +
+            (
+                gameNames[game] ||
+                ""
+            ) +
+            '">';
 
     }
 
     else {
 
-        preview.innerHTML = "";
-
+        preview.innerHTML =
+            "";
     }
 
 
@@ -3210,7 +3462,6 @@ function showGame() {
 
         extraOptions.style.display =
             "none";
-
     }
 
 
@@ -3238,12 +3489,10 @@ function showGame() {
         rayTracingOption.classList.remove(
             "active"
         );
-
     }
 
 
     updateFrameGenerationVisibility();
-
 }
 
 
@@ -3254,7 +3503,8 @@ function showGame() {
 function showGPU() {
 
     const gpu =
-        searchState.gpu.value;
+        selectedGPU;
+
 
     const preview =
         document.getElementById(
@@ -3264,12 +3514,12 @@ function showGPU() {
 
     if (!gpu) {
 
-        preview.innerHTML = "";
+        preview.innerHTML =
+            "";
 
         updateFrameGenerationVisibility();
 
         return;
-
     }
 
 
@@ -3300,7 +3550,6 @@ function showGPU() {
 
 
     updateFrameGenerationVisibility();
-
 }
 
 
@@ -3311,10 +3560,12 @@ function showGPU() {
 function updateFrameGenerationVisibility() {
 
     const game =
-        searchState.game.value;
+        selectedGame;
+
 
     const gpu =
-        searchState.gpu.value;
+        selectedGPU;
+
 
     const framegen =
         document.getElementById(
@@ -3323,11 +3574,13 @@ function updateFrameGenerationVisibility() {
 
 
     if (!framegen) {
+
         return;
     }
 
 
     const isRTX40 =
+
         gpu === "rtx4070" ||
         gpu === "rtx4070ti" ||
         gpu === "rtx4070tisuper" ||
@@ -3335,7 +3588,9 @@ function updateFrameGenerationVisibility() {
         gpu === "rtx4060" ||
         gpu === "rtx4060ti";
 
+
     const isRTX50 =
+
         gpu === "rtx5060" ||
         gpu === "rtx5070" ||
         gpu === "rtx5070ti" ||
@@ -3343,15 +3598,19 @@ function updateFrameGenerationVisibility() {
 
 
     if (
+
         (
             game === "cyberpunk" ||
             game === "tlou2"
         )
+
         &&
+
         (
             isRTX40 ||
             isRTX50
         )
+
     ) {
 
         framegen.style.display =
@@ -3367,9 +3626,7 @@ function updateFrameGenerationVisibility() {
         framegen.classList.remove(
             "active"
         );
-
     }
-
 }
 
 
@@ -3380,7 +3637,8 @@ function updateFrameGenerationVisibility() {
 function showCPU() {
 
     const cpu =
-        searchState.cpu.value;
+        selectedCPU;
+
 
     const preview =
         document.getElementById(
@@ -3390,10 +3648,10 @@ function showCPU() {
 
     if (!cpu) {
 
-        preview.innerHTML = "";
+        preview.innerHTML =
+            "";
 
         return;
-
     }
 
 
@@ -3404,66 +3662,83 @@ function showCPU() {
             '" alt="' +
             cpuNames[cpu] +
         '">';
-
 }
 
 
 /* =========================================================
-   TOGGLE OPCIONES
+   TOGGLE
 ========================================================= */
 
-function toggleCyberpunkOption(option) {
+function toggleCyberpunkOption(
+    option
+) {
 
     const game =
-        searchState.game.value;
+        selectedGame;
+
 
     const gpu =
-        searchState.gpu.value;
+        selectedGPU;
 
 
     if (
+
         option === "framegen"
+
         &&
+
         (
+
             (
-                game !== "cyberpunk" &&
+                game !== "cyberpunk"
+                &&
                 game !== "tlou2"
             )
+
             ||
-            gpu === "rtx3080" ||
+
             !gpu
+
         )
+
     ) {
 
         return;
-
     }
 
 
     if (
+
         option === "raytracing"
+
         &&
-        game !== "cyberpunk" &&
+
+        game !== "cyberpunk"
+        &&
         game !== "eldenring"
+
     ) {
 
         return;
-
     }
 
 
     const element =
+
         document.getElementById(
+
             option === "raytracing"
+
                 ? "raytracing-option"
+
                 : "framegen-option"
+
         );
 
 
     element.classList.toggle(
         "active"
     );
-
 }
 
 
@@ -3474,23 +3749,28 @@ function toggleCyberpunkOption(option) {
 function calculateFPS() {
 
     const game =
-        searchState.game.value;
+        selectedGame;
+
 
     const gpu =
-        searchState.gpu.value;
+        selectedGPU;
+
 
     const cpu =
-        searchState.cpu.value;
+        selectedCPU;
+
 
     const resolution =
         document.getElementById(
             "resolution"
         ).value;
 
+
     const target =
         document.getElementById(
             "target"
         ).value;
+
 
     const result =
         document.getElementById(
@@ -3503,11 +3783,13 @@ function calculateFPS() {
     ===================================================== */
 
     if (
+
         !game ||
         !gpu ||
         !cpu ||
         !resolution ||
         !target
+
     ) {
 
         result.innerHTML = `
@@ -3530,7 +3812,6 @@ function calculateFPS() {
         `;
 
         return;
-
     }
 
 
@@ -3570,7 +3851,6 @@ function calculateFPS() {
         `;
 
         return;
-
     }
 
 
@@ -3578,9 +3858,12 @@ function calculateFPS() {
        OPCIONES EXTRA
     ===================================================== */
 
-    let rayTracing = false;
+    let rayTracing =
+        false;
 
-    let frameGeneration = false;
+
+    let frameGeneration =
+        false;
 
 
     /* =====================================================
@@ -3588,8 +3871,10 @@ function calculateFPS() {
     ===================================================== */
 
     if (
+
         game === "cyberpunk" ||
         game === "eldenring"
+
     ) {
 
         rayTracing =
@@ -3599,7 +3884,9 @@ function calculateFPS() {
                     "raytracing-option"
                 )
                 .classList
-                .contains("active");
+                .contains(
+                    "active"
+                );
 
 
         if (rayTracing) {
@@ -3611,9 +3898,7 @@ function calculateFPS() {
                     resolution,
                     game
                 );
-
         }
-
     }
 
 
@@ -3622,8 +3907,10 @@ function calculateFPS() {
     ===================================================== */
 
     if (
+
         game === "cyberpunk" ||
         game === "tlou2"
+
     ) {
 
         frameGeneration =
@@ -3633,20 +3920,26 @@ function calculateFPS() {
                     "framegen-option"
                 )
                 .classList
-                .contains("active");
+                .contains(
+                    "active"
+                );
 
 
-        if (gpu === "rtx3080") {
+        if (
+            gpu === "rtx3080"
+        ) {
 
-            frameGeneration = false;
+            frameGeneration =
+                false;
 
             document
                 .getElementById(
                     "framegen-option"
                 )
                 .classList
-                .remove("active");
-
+                .remove(
+                    "active"
+                );
         }
 
 
@@ -3657,9 +3950,7 @@ function calculateFPS() {
                     fps,
                     gpu
                 );
-
         }
-
     }
 
 
@@ -3668,7 +3959,9 @@ function calculateFPS() {
     ===================================================== */
 
     const range =
-        createFPSRange(fps);
+        createFPSRange(
+            fps
+        );
 
 
     /* =====================================================
@@ -3678,22 +3971,28 @@ function calculateFPS() {
     let configuracion;
 
 
-    if (target === "competitive") {
+    if (
+        target === "competitive"
+    ) {
 
-        configuracion = "Baja";
+        configuracion =
+            "Baja";
 
     }
 
-    else if (target === "balanced") {
+    else if (
+        target === "balanced"
+    ) {
 
-        configuracion = "Media";
+        configuracion =
+            "Media";
 
     }
 
     else {
 
-        configuracion = "Alta";
-
+        configuracion =
+            "Alta";
     }
 
 
@@ -3704,35 +4003,45 @@ function calculateFPS() {
     let resultado;
 
 
-    if (range.min >= 240) {
+    if (
+        range.min >= 240
+    ) {
 
         resultado =
             "Excelente para altas tasas de refresco";
 
     }
 
-    else if (range.min >= 144) {
+    else if (
+        range.min >= 144
+    ) {
 
         resultado =
             "Excelente rendimiento";
 
     }
 
-    else if (range.min >= 100) {
+    else if (
+        range.min >= 100
+    ) {
 
         resultado =
             "Muy buen rendimiento";
 
     }
 
-    else if (range.min >= 60) {
+    else if (
+        range.min >= 60
+    ) {
 
         resultado =
             "Buen rendimiento";
 
     }
 
-    else if (range.min >= 40) {
+    else if (
+        range.min >= 40
+    ) {
 
         resultado =
             "Rendimiento aceptable";
@@ -3743,7 +4052,6 @@ function calculateFPS() {
 
         resultado =
             "Rendimiento limitado";
-
     }
 
 
@@ -3751,18 +4059,23 @@ function calculateFPS() {
        OPCIONES EXTRA RESULTADO
     ===================================================== */
 
-    let opcionesExtra = "";
+    let opcionesExtra =
+        "";
 
 
     if (
+
         game === "cyberpunk" ||
         game === "eldenring" ||
         game === "tlou2"
+
     ) {
 
         if (
+
             game === "cyberpunk" ||
             game === "eldenring"
+
         ) {
 
             opcionesExtra += `
@@ -3774,23 +4087,26 @@ function calculateFPS() {
                     </span>
 
                     <strong>
+
                         ${
                             rayTracing
                             ? "Activado"
                             : "Desactivado"
                         }
+
                     </strong>
 
                 </div>
 
             `;
-
         }
 
 
         if (
+
             game === "cyberpunk" ||
             game === "tlou2"
+
         ) {
 
             opcionesExtra += `
@@ -3802,19 +4118,19 @@ function calculateFPS() {
                     </span>
 
                     <strong>
+
                         ${
                             frameGeneration
                             ? "Activado"
                             : "Desactivado"
                         }
+
                     </strong>
 
                 </div>
 
             `;
-
         }
-
     }
 
 
@@ -3824,11 +4140,14 @@ function calculateFPS() {
 
     const resolutionText = {
 
-        "1080": "1080p",
+        "1080":
+            "1080p",
 
-        "1440": "1440p",
+        "1440":
+            "1440p",
 
-        "2160": "4K"
+        "2160":
+            "4K"
 
     }[resolution];
 
@@ -3838,7 +4157,8 @@ function calculateFPS() {
     ===================================================== */
 
     const vramText =
-        gpuVRAM[gpu] || "—";
+        gpuVRAM[gpu] ||
+        "—";
 
 
     const vramWarning =
@@ -3862,7 +4182,7 @@ function calculateFPS() {
 
 
     /* =====================================================
-       RESULTADO FINAL
+       RESULTADO
     ===================================================== */
 
     result.innerHTML = `
@@ -4030,19 +4350,12 @@ function calculateFPS() {
         </div>
 
     `;
-
 }
 
 
 /* =========================================================
    INICIALIZACIÓN
 ========================================================= */
-
-renderSearchOptions("game");
-
-renderSearchOptions("gpu");
-
-renderSearchOptions("cpu");
 
 showGame();
 
@@ -4054,5 +4367,7 @@ updateFrameGenerationVisibility();
 
 </script>
 
+
 </body>
+
 </html>
