@@ -865,6 +865,31 @@ button:active {
     line-height: 1.6;
 }
 
+/* =========================
+   AVISO VRAM
+========================= */
+
+.vram-warning {
+
+    margin-top: 16px;
+
+    padding: 11px 13px;
+
+    border-radius: 10px;
+
+    background: rgba(255,190,80,.07);
+
+    border: 1px solid rgba(255,190,80,.22);
+
+    color: #c9a96a;
+
+    font-size: 11px;
+
+    line-height: 1.5;
+
+    text-align: center;
+
+}
 
 /* =========================
    ANIMACIONES
@@ -1839,7 +1864,96 @@ rx7900xtx: "24 GB"
 
 };
 
+/* =========================================================
+   AVISO DE VRAM
+========================================================= */
 
+function getVRAMWarning(game, gpu, resolution) {
+
+    const vramGB = parseInt(
+        gpuVRAM[gpu]
+    );
+
+    if (!vramGB) {
+        return "";
+    }
+
+
+    /*
+       Umbrales generales
+
+       1080p → 6 GB o menos
+       1440p → 8 GB o menos
+       4K → 10 GB o menos
+
+       Juegos especialmente exigentes:
+       Cyberpunk 2077
+       The Last of Us Part II
+    */
+
+    let limit = 0;
+
+
+    if (resolution === "1080") {
+
+        limit = 6;
+
+    }
+
+    else if (resolution === "1440") {
+
+        limit = 8;
+
+    }
+
+    else if (resolution === "2160") {
+
+        limit = 10;
+
+    }
+
+
+    /*
+       Juegos exigentes
+    */
+
+    if (
+        game === "cyberpunk" ||
+        game === "tlou2"
+    ) {
+
+        if (resolution === "1440") {
+
+            limit = 10;
+
+        }
+
+        else if (resolution === "2160") {
+
+            limit = 12;
+
+        }
+
+    }
+
+
+    if (vramGB <= limit) {
+
+        return `
+            <div class="vram-warning">
+
+                ⚠️ La VRAM puede ser un factor limitante
+                en esta configuración.
+
+            </div>
+        `;
+
+    }
+
+
+    return "";
+
+}
 /* =========================================================
    CPU
 ========================================================= */
@@ -3058,6 +3172,13 @@ function calculateFPS() {
 
     const vramText =
         gpuVRAM[gpu] || "—";
+        
+        const vramWarning =
+    getVRAMWarning(
+        game,
+        gpu,
+        resolution
+    );
 
 
     /* =========================
@@ -3185,7 +3306,7 @@ function calculateFPS() {
 
             </div>
 
-
+${vramWarning}
             <div class="performance-wrapper">
 
                 <div class="performance-bar">
