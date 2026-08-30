@@ -1684,6 +1684,147 @@ button:active {
         font-size: 36px;
     }
 }
+/* =========================================================
+   ICONOS DE LOS SELECTORES
+========================================================= */
+
+.selector-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.selector-icon {
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    object-fit: contain;
+
+    filter:
+        drop-shadow(0 0 5px rgba(88,101,242,.65))
+        drop-shadow(0 0 12px rgba(88,101,242,.28));
+}
+
+/* El selector ocupa el espacio restante */
+
+.selector-wrapper select,
+.selector-wrapper .search-container {
+    flex: 1;
+    min-width: 0;
+}
+
+/* =========================================================
+   ICONOS DENTRO DE JUEGO / GPU / CPU
+========================================================= */
+
+.search-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-option-icon {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    object-fit: contain;
+
+    filter:
+        drop-shadow(0 0 4px rgba(88,101,242,.65))
+        drop-shadow(0 0 9px rgba(88,101,242,.28));
+}
+
+/* =========================================================
+   SELECTORES PERSONALIZADOS
+========================================================= */
+
+.custom-selector {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    width: 100%;
+
+    min-width: 0;
+
+    position: relative;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1b1f29,
+            #151820
+        );
+
+    border: 1px solid rgba(255,255,255,0.07);
+
+    border-radius: 15px;
+
+    padding: 6px;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.025),
+        0 6px 18px rgba(0,0,0,0.12);
+
+    transition:
+        border-color .25s ease,
+        box-shadow .25s ease;
+}
+
+.custom-selector:hover {
+
+    border-color:
+        rgba(255,255,255,0.13);
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.035),
+        0 8px 22px rgba(0,0,0,0.18);
+}
+
+.custom-selector:focus-within {
+
+    border-color:
+        rgba(88,101,242,0.75);
+
+    box-shadow:
+        0 0 0 3px rgba(88,101,242,0.08),
+        0 8px 25px rgba(0,0,0,0.2);
+}
+
+.custom-selector .search-container {
+
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+/* ICONOS */
+
+.custom-selector .selector-icon {
+
+    width: 42px;
+
+    height: 42px;
+
+    flex: 0 0 42px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 0 5px
+            rgba(88,101,242,.65)
+        )
+        drop-shadow(
+            0 0 12px
+            rgba(88,101,242,.28)
+        );
+}
 
 </style>
 
@@ -1713,10 +1854,16 @@ button:active {
 
             <div class="game-container form-full">
 
-                <div
-                    class="search-container"
-                    id="game-search-container"
-                >
+    <img
+        class="selector-icon"
+        src="./juegoicono.PNG"
+        alt=""
+    >
+
+    <div
+        class="search-container"
+        id="game-search-container"
+    >
 
                     <input
                         type="text"
@@ -1770,10 +1917,16 @@ button:active {
 
             <div class="gpu-container">
 
-                <div
-                    class="search-container"
-                    id="gpu-search-container"
-                >
+    <img
+        class="selector-icon"
+        src="./gpuicono.PNG"
+        alt=""
+    >
+
+    <div
+        class="search-container"
+        id="gpu-search-container"
+    >
 
                     <input
                         type="text"
@@ -1827,10 +1980,16 @@ button:active {
 
             <div class="cpu-container">
 
-                <div
-                    class="search-container"
-                    id="cpu-search-container"
-                >
+    <img
+        class="selector-icon"
+        src="./cpuicono.PNG"
+        alt=""
+    >
+
+    <div
+        class="search-container"
+        id="cpu-search-container"
+    >
 
                     <input
                         type="text"
@@ -1879,53 +2038,123 @@ button:active {
 
 
             <!-- =================================================
-                 RESOLUCIÓN
-            ================================================== -->
+     RESOLUCIÓN
+================================================== -->
 
-            <select id="resolution">
+<div class="custom-selector">
 
-                <option value="">
-                    Resolución...
-                </option>
+    <img
+        class="selector-icon"
+        src="./resolucionicono.PNG"
+        alt=""
+    >
 
-                <option value="1080">
-                    1080p
-                </option>
+    <div
+        class="search-container"
+        id="resolution-search-container"
+    >
 
-                <option value="1440">
-                    1440p
-                </option>
+        <input
+            type="text"
+            id="resolution-search"
+            class="search-box"
+            placeholder="Resolución..."
+            autocomplete="off"
+            readonly
+        >
 
-                <option value="2160">
-                    4K
-                </option>
+        <div class="search-icon">
 
-            </select>
+            <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+            >
+
+                <circle
+                    cx="11"
+                    cy="11"
+                    r="6.5"
+                ></circle>
+
+                <line
+                    x1="16"
+                    y1="16"
+                    x2="21"
+                    y2="21"
+                ></line>
+
+            </svg>
+
+        </div>
+
+        <div
+            class="search-dropdown"
+            id="resolution-dropdown"
+        ></div>
+
+    </div>
+
+</div>
 
 
-            <!-- =================================================
-                 CALIDAD
-            ================================================== -->
+<!-- =================================================
+     CALIDAD
+================================================== -->
 
-            <select id="target">
+<div class="custom-selector">
 
-                <option value="">
-                    Calidad...
-                </option>
+    <img
+        class="selector-icon"
+        src="./calidadicono.PNG"
+        alt=""
+    >
 
-                <option value="competitive">
-                    Baja
-                </option>
+    <div
+        class="search-container"
+        id="target-search-container"
+    >
 
-                <option value="balanced">
-                    Media
-                </option>
+        <input
+            type="text"
+            id="target-search"
+            class="search-box"
+            placeholder="Calidad..."
+            autocomplete="off"
+            readonly
+        >
 
-                <option value="quality">
-                    Alta
-                </option>
+        <div class="search-icon">
 
-            </select>
+            <svg
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+            >
+
+                <circle
+                    cx="11"
+                    cy="11"
+                    r="6.5"
+                ></circle>
+
+                <line
+                    x1="16"
+                    y1="16"
+                    x2="21"
+                    y2="21"
+                ></line>
+
+            </svg>
+
+        </div>
+
+        <div
+            class="search-dropdown"
+            id="target-dropdown"
+        ></div>
+
+    </div>
+
+</div>
 
 
             <!-- =================================================
@@ -2900,21 +3129,24 @@ const gameImages = {
 const gameOptions = Object.entries(gameNames).map(
     ([value, name]) => ({
         value,
-        name
+        name,
+        icon: "./juegoicono.PNG"
     })
 );
 
 const gpuOptions = Object.entries(gpuNames).map(
     ([value, name]) => ({
         value,
-        name
+        name,
+        icon: "./gpuicono.PNG"
     })
 );
 
 const cpuOptions = Object.entries(cpuNames).map(
     ([value, name]) => ({
         value,
-        name
+        name,
+        icon: "./cpuicono.PNG"
     })
 );
 
@@ -2998,8 +3230,19 @@ function setupSearch(
             item.className =
                 "search-option";
 
-            item.textContent =
-                option.name;
+            const icon = document.createElement("img");
+
+icon.className = "search-option-icon";
+icon.src = option.icon;
+icon.alt = "";
+
+item.appendChild(icon);
+
+const name = document.createElement("span");
+
+name.textContent = option.name;
+
+item.appendChild(name);
 
             item.dataset.value =
                 option.value;
@@ -3946,7 +4189,248 @@ function toggleCyberpunkOption(
 
 }
 
+/* =========================================================
+   RESOLUCIÓN
+========================================================= */
 
+const resolutionOptions = [
+
+    {
+        value: "1080",
+        name: "1080p",
+        icon: "./resolucionicono.PNG"
+    },
+
+    {
+        value: "1440",
+        name: "1440p",
+        icon: "./resolucionicono.PNG"
+    },
+
+    {
+        value: "2160",
+        name: "4K",
+        icon: "./resolucionicono.PNG"
+    }
+
+];
+
+
+/* =========================================================
+   CALIDAD
+========================================================= */
+
+const targetOptions = [
+
+    {
+        value: "competitive",
+        name: "Baja",
+        icon: "./calidadicono.PNG"
+    },
+
+    {
+        value: "balanced",
+        name: "Media",
+        icon: "./calidadicono.PNG"
+    },
+
+    {
+        value: "quality",
+        name: "Alta",
+        icon: "./calidadicono.PNG"
+    }
+
+];
+
+
+/* =========================================================
+   SELECTOR RESOLUCIÓN
+========================================================= */
+
+let selectedResolution = "";
+
+
+/* =========================================================
+   SELECTOR CALIDAD
+========================================================= */
+
+let selectedTarget = "";
+
+
+function setupSimpleSelector(
+    inputId,
+    containerId,
+    dropdownId,
+    options,
+    onSelect
+) {
+
+    const input =
+        document.getElementById(inputId);
+
+    const container =
+        document.getElementById(containerId);
+
+    const dropdown =
+        document.getElementById(dropdownId);
+
+
+    function renderOptions() {
+
+        dropdown.innerHTML = "";
+
+
+        options.forEach(option => {
+
+            const item =
+                document.createElement("div");
+
+            item.className =
+                "search-option";
+
+
+            const icon =
+                document.createElement("img");
+
+            icon.className =
+                "search-option-icon";
+
+            icon.src =
+                option.icon;
+
+            icon.alt =
+                "";
+
+
+            const name =
+                document.createElement("span");
+
+            name.textContent =
+                option.name;
+
+
+            item.appendChild(icon);
+
+            item.appendChild(name);
+
+
+            item.addEventListener(
+                "mousedown",
+                function(event) {
+
+                    event.preventDefault();
+
+                    onSelect(option);
+
+                    closeAllSearches();
+
+                }
+            );
+
+
+            dropdown.appendChild(item);
+
+        });
+
+    }
+
+
+    function open() {
+
+        closeAllSearches(container);
+
+        container.classList.add("open");
+
+        renderOptions();
+
+    }
+
+
+    input.addEventListener(
+        "click",
+        open
+    );
+
+
+    input.addEventListener(
+        "focus",
+        open
+    );
+
+
+    renderOptions();
+
+}
+
+
+/* =========================================================
+   SELECCIONAR RESOLUCIÓN
+========================================================= */
+
+function selectResolution(option) {
+
+    selectedResolution =
+        option.value;
+
+
+    document.getElementById(
+        "resolution-search"
+    ).value =
+        option.name;
+
+}
+
+
+/* =========================================================
+   SELECCIONAR CALIDAD
+========================================================= */
+
+function selectTarget(option) {
+
+    selectedTarget =
+        option.value;
+
+
+    document.getElementById(
+        "target-search"
+    ).value =
+        option.name;
+
+}
+
+
+/* =========================================================
+   INICIAR SELECTORES
+========================================================= */
+
+setupSimpleSelector(
+
+    "resolution-search",
+
+    "resolution-search-container",
+
+    "resolution-dropdown",
+
+    resolutionOptions,
+
+    selectResolution
+
+);
+
+
+setupSimpleSelector(
+
+    "target-search",
+
+    "target-search-container",
+
+    "target-dropdown",
+
+    targetOptions,
+
+    selectTarget
+
+);
 /* =========================================================
    CALCULAR FPS
 ========================================================= */
@@ -3963,14 +4447,11 @@ function calculateFPS() {
         selectedCPU;
 
     const resolution =
-        document.getElementById(
-            "resolution"
-        ).value;
+    selectedResolution;
 
-    const target =
-        document.getElementById(
-            "target"
-        ).value;
+
+const target =
+    selectedTarget;
 
     const result =
         document.getElementById(
