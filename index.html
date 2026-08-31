@@ -1,4 +1,4 @@
-#   
+
 <!DOCTYPE html>  
 <html lang="es">  
   
@@ -635,74 +635,85 @@ select option {
     flex: 0 0 155px;  
 }  
   
-.gpu-info {  
-  
-    min-height: 48px;  
-  
-    display: flex;  
-  
-    align-items: center;  
-  
-    gap: 9px;  
-  
-    padding: 5px 8px;  
-  
-    background:  
-        linear-gradient(  
-            145deg,  
-            #222733,  
-            #1c2029  
-        );  
-  
-    border: 1px solid rgba(255,255,255,0.05);  
-  
-    border-radius: 10px;  
-  
-    text-align: left;  
-}  
-  
-.gpu-info img {  
-  
-    width: 43px;  
-  
-    height: 37px;  
-  
-    object-fit: contain;  
-  
-    filter:  
-        drop-shadow(  
-            0 4px 7px rgba(0,0,0,0.4)  
-        );  
-}  
-  
-.gpu-info div {  
-  
-    display: flex;  
-  
-    flex-direction: column;  
-  
-    min-width: 0;  
-}  
-  
-.gpu-info strong {  
-  
-    font-size: 12px;  
-  
-    color: #f2f4f8;  
-  
-    white-space: nowrap;  
-}  
-  
-.gpu-info span {  
-  
-    margin-top: 3px;  
-  
-    color: #858c9d;  
-  
-    font-size: 10px;  
-  
-    white-space: nowrap;  
-}  
+.gpu-info {
+    min-height: 64px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 8px 14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #222733,
+            #1c2029
+        );
+
+    border: 1px solid rgba(88,101,242,0.18);
+    border-radius: 12px;
+
+    text-align: left;
+
+    transition:
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+}
+
+.gpu-info:hover {
+    transform: scale(1.025);
+
+    border-color: rgba(88,101,242,0.65);
+
+    box-shadow:
+        0 0 0 1px rgba(88,101,242,0.08),
+        0 8px 25px rgba(0,0,0,0.25),
+        0 0 18px rgba(88,101,242,0.10);
+}
+
+.gpu-info img {
+    width: 62px;
+    height: 50px;
+
+    flex: 0 0 62px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 5px 9px rgba(0,0,0,0.45)
+        );
+}
+
+.gpu-info div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    min-width: 0;
+    flex: 1;
+}
+
+.gpu-info strong {
+    font-size: 14px;
+    font-weight: 700;
+
+    color: #f2f4f8;
+
+    white-space: nowrap;
+}
+
+.gpu-info span {
+    margin-top: 5px;
+
+    color: #858c9d;
+
+    font-size: 11px;
+    font-weight: 500;
+
+    white-space: nowrap;
+}
   
   
 /* =========================================================  
