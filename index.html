@@ -630,18 +630,21 @@ select option {
    GPU PREVIEW  
 ========================================================= */  
   
-#gpu-preview {  
-  
-    flex: 0 0 155px;  
+#gpu-preview {
+    flex: 1 1 0;
+    min-width: 0;
+    width: 100%;
 }  
   
 .gpu-info {
     min-height: 64px;
     width: 100%;
+
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 8px 14px;
+
+    gap: 18px;
+    padding: 8px 18px;
 
     background:
         linear-gradient(
@@ -654,6 +657,8 @@ select option {
     border-radius: 12px;
 
     text-align: left;
+
+    box-sizing: border-box;
 
     transition:
         transform .25s ease,
